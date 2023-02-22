@@ -1,0 +1,516 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F887 ]
+[d frameptr 0 ]
+"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\flge.c
+[v ___flge __flge `(b  1 e 0 0 ]
+"15 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\flneg.c
+[v ___flneg __flneg `(d  1 e 4 0 ]
+"43 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+"10 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"242
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"10 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+"6 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"11 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_slave2.X\hc_sr04.c
+[v _HCSR04_Init HCSR04_Init `(v  1 e 1 0 ]
+"20
+[v _HCSR04_Get_Distance HCSR04_Get_Distance `(f  1 e 4 0 ]
+"83 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_slave2.X\i2c.c
+[v _I2C_Init_Slave I2C_Init_Slave `(v  1 e 1 0 ]
+"97
+[v _I2C_Error_Read I2C_Error_Read `(s  1 e 2 0 ]
+"103
+[v _I2C_Write_Mode I2C_Write_Mode `(s  1 e 2 0 ]
+"107
+[v _I2C_Read_Mode I2C_Read_Mode `(s  1 e 2 0 ]
+"112
+[v _I2C_Error_Data I2C_Error_Data `(v  1 e 1 0 ]
+"123
+[v _I2C_Read_Slave I2C_Read_Slave `(uc  1 e 1 0 ]
+"135
+[v _I2C_Write_Slave I2C_Write_Slave `(v  1 e 1 0 ]
+"59 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_slave2.X\main_slave2.c
+[v _main main `(v  1 e 1 0 ]
+"80
+[v _isr isr `II(v  1 e 1 0 ]
+"114
+[v _setup setup `(v  1 e 1 0 ]
+"134
+[v _Servo_Init Servo_Init `(v  1 e 1 0 ]
+"159
+[v _Servo_1_Write Servo_1_Write `(v  1 e 1 0 ]
+"166
+[v _Servo_2_Write Servo_2_Write `(v  1 e 1 0 ]
+"60 E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
+[v _TMR0 TMR0 `VEuc  1 e 1 @1 ]
+"167
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+[s S82 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+"184
+[u S91 . 1 `S82 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES91  1 e 1 @5 ]
+"229
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+"291
+[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+"353
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+[s S580 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+"370
+[u S589 . 1 `S580 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES589  1 e 1 @8 ]
+[s S50 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"483
+[s S59 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 TMR0IE 1 0 :1:5 
+]
+[u S64 . 1 `S50 1 . 1 0 `S59 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES64  1 e 1 @11 ]
+[s S104 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"554
+[u S112 . 1 `S104 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES112  1 e 1 @12 ]
+"658
+[v _TMR1L TMR1L `VEuc  1 e 1 @14 ]
+"665
+[v _TMR1H TMR1H `VEuc  1 e 1 @15 ]
+"672
+[v _T1CON T1CON `VEuc  1 e 1 @16 ]
+[s S602 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 TMR1CS 1 0 :1:1 
+`uc 1 nT1SYNC 1 0 :1:2 
+`uc 1 T1OSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 TMR1GE 1 0 :1:6 
+`uc 1 T1GINV 1 0 :1:7 
+]
+"701
+[s S610 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T1INSYNC 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 T1GIV 1 0 :1:7 
+]
+[s S618 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T1SYNC 1 0 :1:2 
+]
+[u S621 . 1 `S602 1 . 1 0 `S610 1 . 1 0 `S618 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES621  1 e 1 @16 ]
+"844
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+"851
+[v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
+[s S386 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+"871
+[s S392 . 1 `uc 1 SSPM0 1 0 :1:0 
+`uc 1 SSPM1 1 0 :1:1 
+`uc 1 SSPM2 1 0 :1:2 
+`uc 1 SSPM3 1 0 :1:3 
+]
+[u S397 . 1 `S386 1 . 1 0 `S392 1 . 1 0 ]
+[v _SSPCONbits SSPCONbits `VES397  1 e 1 @20 ]
+[s S211 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+"1367
+[s S218 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+]
+[u S222 . 1 `S211 1 . 1 0 `S218 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES222  1 e 1 @129 ]
+"1417
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+[s S190 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1434
+[u S199 . 1 `S190 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES199  1 e 1 @133 ]
+[s S313 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1558
+[u S322 . 1 `S313 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES322  1 e 1 @135 ]
+[s S559 . 1 `uc 1 TRISD0 1 0 :1:0 
+`uc 1 TRISD1 1 0 :1:1 
+`uc 1 TRISD2 1 0 :1:2 
+`uc 1 TRISD3 1 0 :1:3 
+`uc 1 TRISD4 1 0 :1:4 
+`uc 1 TRISD5 1 0 :1:5 
+`uc 1 TRISD6 1 0 :1:6 
+`uc 1 TRISD7 1 0 :1:7 
+]
+"1620
+[u S568 . 1 `S559 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES568  1 e 1 @136 ]
+[s S367 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+]
+"1719
+[u S375 . 1 `S367 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES375  1 e 1 @140 ]
+[s S155 . 1 `uc 1 SCS 1 0 :1:0 
+`uc 1 LTS 1 0 :1:1 
+`uc 1 HTS 1 0 :1:2 
+`uc 1 OSTS 1 0 :1:3 
+`uc 1 IRCF 1 0 :3:4 
+]
+"1883
+[s S161 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 IRCF0 1 0 :1:4 
+`uc 1 IRCF1 1 0 :1:5 
+`uc 1 IRCF2 1 0 :1:6 
+]
+[u S166 . 1 `S155 1 . 1 0 `S161 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES166  1 e 1 @143 ]
+"1980
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
+"2049
+[v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
+"2178
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
+[s S412 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+"2232
+[s S421 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D 1 0 :1:5 
+]
+[s S426 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ 1 0 :1:2 
+`uc 1 I2C_START 1 0 :1:3 
+`uc 1 I2C_STOP 1 0 :1:4 
+`uc 1 I2C_DATA 1 0 :1:5 
+]
+[s S432 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA 1 0 :1:5 
+]
+[s S437 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS 1 0 :1:5 
+]
+[s S442 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D_A 1 0 :1:5 
+]
+[s S447 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[u S452 . 1 `S412 1 . 1 0 `S421 1 . 1 0 `S426 1 . 1 0 `S432 1 . 1 0 `S437 1 . 1 0 `S442 1 . 1 0 `S447 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES452  1 e 1 @148 ]
+"3388
+[v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
+"3450
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"3646
+[v _BF BF `VEb  1 e 0 @1184 ]
+"52 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_slave2.X\main_slave2.c
+[v _recibido recibido `uc  1 e 1 0 ]
+[v _dis dis `uc  1 e 1 0 ]
+"53
+[v _cont_sr cont_sr `ui  1 e 2 0 ]
+"54
+[v _data_s data_s `[8]uc  1 e 8 0 ]
+"59
+[v _main main `(v  1 e 1 0 ]
+{
+"63
+[v main@distancia distancia `f  1 a 4 12 ]
+"78
+} 0
+"114
+[v _setup setup `(v  1 e 1 0 ]
+{
+"132
+} 0
+"134
+[v _Servo_Init Servo_Init `(v  1 e 1 0 ]
+{
+"156
+} 0
+"83 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_slave2.X\i2c.c
+[v _I2C_Init_Slave I2C_Init_Slave `(v  1 e 1 0 ]
+{
+[v I2C_Init_Slave@add_slave add_slave `uc  1 a 1 wreg ]
+[v I2C_Init_Slave@add_slave add_slave `uc  1 a 1 wreg ]
+"85
+[v I2C_Init_Slave@add_slave add_slave `uc  1 a 1 0 ]
+"95
+} 0
+"43 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+{
+"45
+[v ___fltol@exp1 exp1 `uc  1 a 1 75 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 74 ]
+"43
+[v ___fltol@f1 f1 `d  1 p 4 66 ]
+"70
+} 0
+"166 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_slave2.X\main_slave2.c
+[v _Servo_2_Write Servo_2_Write `(v  1 e 1 0 ]
+{
+[v Servo_2_Write@ang ang `uc  1 a 1 wreg ]
+[v Servo_2_Write@ang ang `uc  1 a 1 wreg ]
+"168
+[v Servo_2_Write@ang ang `uc  1 a 1 17 ]
+"169
+} 0
+"159
+[v _Servo_1_Write Servo_1_Write `(v  1 e 1 0 ]
+{
+[v Servo_1_Write@ang ang `uc  1 a 1 wreg ]
+[v Servo_1_Write@ang ang `uc  1 a 1 wreg ]
+"161
+[v Servo_1_Write@ang ang `uc  1 a 1 17 ]
+"162
+} 0
+"15 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 4 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+"53
+} 0
+"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 13 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 12 ]
+[v ___awdiv@counter counter `uc  1 a 1 11 ]
+"5
+[v ___awdiv@divisor divisor `i  1 p 2 6 ]
+[v ___awdiv@dividend dividend `i  1 p 2 8 ]
+"41
+} 0
+"11 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_slave2.X\hc_sr04.c
+[v _HCSR04_Init HCSR04_Init `(v  1 e 1 0 ]
+{
+"18
+} 0
+"20
+[v _HCSR04_Get_Distance HCSR04_Get_Distance `(f  1 e 4 0 ]
+{
+"34
+[v HCSR04_Get_Distance@dis_hc dis_hc `f  1 a 4 0 ]
+"23
+[v HCSR04_Get_Distance@timer_low timer_low `ui  1 a 2 10 ]
+"22
+[v HCSR04_Get_Distance@timer_high timer_high `ui  1 a 2 8 ]
+"36
+} 0
+"10 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+{
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+"13
+[v ___xxtofl@arg arg `ul  1 a 4 10 ]
+"12
+[v ___xxtofl@exp exp `uc  1 a 1 9 ]
+"10
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+[v ___xxtofl@val val `l  1 p 4 0 ]
+"15
+[v ___xxtofl@sign sign `uc  1 a 1 8 ]
+"44
+} 0
+"8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+{
+[s S949 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+"13
+[s S954 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S957 . 4 `l 1 i 4 0 `d 1 f 4 0 `S949 1 fAsBytes 4 0 `S954 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S957  1 a 4 34 ]
+"12
+[v ___flmul@grs grs `ul  1 a 4 28 ]
+[s S1026 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+"14
+[u S1029 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1026 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1029  1 a 2 38 ]
+"10
+[v ___flmul@bexp bexp `uc  1 a 1 33 ]
+"11
+[v ___flmul@aexp aexp `uc  1 a 1 32 ]
+"9
+[v ___flmul@sign sign `uc  1 a 1 27 ]
+"8
+[v ___flmul@b b `d  1 p 4 14 ]
+[v ___flmul@a a `d  1 p 4 18 ]
+"205
+} 0
+"4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+{
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+"6
+[v __Umul8_16@word_mpld word_mpld `ui  1 a 2 6 ]
+"5
+[v __Umul8_16@product product `ui  1 a 2 4 ]
+"4
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+[v __Umul8_16@multiplicand multiplicand `uc  1 p 1 0 ]
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 8 ]
+"60
+} 0
+"8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+{
+"21
+[v ___fldiv@grs grs `ul  1 a 4 60 ]
+"22
+[v ___fldiv@rem rem `ul  1 a 4 53 ]
+"20
+[v ___fldiv@new_exp new_exp `i  1 a 2 58 ]
+"19
+[v ___fldiv@aexp aexp `uc  1 a 1 65 ]
+"18
+[v ___fldiv@bexp bexp `uc  1 a 1 64 ]
+"16
+[v ___fldiv@sign sign `uc  1 a 1 57 ]
+"8
+[v ___fldiv@a a `d  1 p 4 40 ]
+[v ___fldiv@b b `d  1 p 4 44 ]
+"185
+} 0
+"80 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_slave2.X\main_slave2.c
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"112
+} 0
+"135 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_slave2.X\i2c.c
+[v _I2C_Write_Slave I2C_Write_Slave `(v  1 e 1 0 ]
+{
+[v I2C_Write_Slave@dato_i2c dato_i2c `uc  1 a 1 wreg ]
+[v I2C_Write_Slave@dato_i2c dato_i2c `uc  1 a 1 wreg ]
+"138
+[v I2C_Write_Slave@dato_i2c dato_i2c `uc  1 a 1 0 ]
+"143
+} 0
+"103
+[v _I2C_Write_Mode I2C_Write_Mode `(s  1 e 2 0 ]
+{
+"106
+} 0
+"123
+[v _I2C_Read_Slave I2C_Read_Slave `(uc  1 e 1 0 ]
+{
+"126
+[v I2C_Read_Slave@dato_i2c dato_i2c `uc  1 a 1 0 ]
+"133
+} 0
+"107
+[v _I2C_Read_Mode I2C_Read_Mode `(s  1 e 2 0 ]
+{
+"110
+} 0
+"97
+[v _I2C_Error_Read I2C_Error_Read `(s  1 e 2 0 ]
+{
+"101
+} 0
+"112
+[v _I2C_Error_Data I2C_Error_Data `(v  1 e 1 0 ]
+{
+"121
+} 0
