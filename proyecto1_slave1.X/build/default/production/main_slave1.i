@@ -2780,7 +2780,7 @@ void setup(void);
 
 void main(void){
     setup();
-    TCS230_Init();
+
     contr = 0;
     contg = 0;
     contb = 0;
@@ -2791,9 +2791,16 @@ void main(void){
             PORTAbits.RA1 = 1;
             PORTAbits.RA0 = 0;
 
-            red = TCS230_Get_Value(0x01);
-            green = TCS230_Get_Value(0x02);
-            blue = TCS230_Get_Value(0x03);
+            if (PORTAbits.RA3 == 1){
+                PORTCbits.RC1 = 1;
+            }
+            else {
+                PORTCbits.RC1 = 0;
+            }
+
+
+
+
 
             if((red>28 && red<40) && (green>76 && green<90) && (blue>56 && blue<80))
             {
@@ -2813,9 +2820,8 @@ void main(void){
                 contg = contg;
                 contb = contg;
             }
-
-            _delay((unsigned long)((250)*(8000000/4000.0)));
         }
+        _delay((unsigned long)((500)*(8000000/4000.0)));
     }
 }
 
@@ -2831,37 +2837,14 @@ void __attribute__((picinterrupt(("")))) isr(void){
         }
         if(I2C_Read_Mode() == 1)
         {
-            if (recibido == 0){
-                I2C_Write_Slave(contr);
-            }
-            else if (recibido == 1){
-                I2C_Write_Slave(contg);
-            }
-            else if (recibido == 2){
-                I2C_Write_Slave(contb);
-            }
-            else if (recibido == 3){
-                I2C_Write_Slave(cont);
-            }
-            else if (recibido == 4){
-                dc = 0;
-                INTCONbits.RBIE = 0;
-                PORTAbits.RA0 = 0;
-                PORTAbits.RA1 = 0;
-            }
-            else if (recibido == 5){
-                dc = 1;
-                INTCONbits.RBIE = 1;
-            }
+            I2C_Write_Slave(cont);
+# 120 "main_slave1.c"
         }
         PIR1bits.SSPIF = 0;
     }
     if (INTCONbits.RBIF == 1){
         if (PORTBbits.RB4 == 1){
             cont++;
-        }
-        else if (PORTBbits.RB4 == 0){
-            cont = cont;
         }
         INTCONbits.RBIF = 0;
     }
@@ -2873,16 +2856,17 @@ void setup(void){
 
     TRISAbits.TRISA0 = 0;
     TRISAbits.TRISA1 = 0;
-    TRISBbits.TRISB4 = 1;
+    TRISAbits.TRISA3 = 1;
+    TRISCbits.TRISC1 = 0;
 
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
 
-    INTCONbits.RBIE = 1;
-    INTCONbits.RBIF = 0;
-    IOCBbits.IOCB4 = 1;
+
+
+
 
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.IRCF1 = 1;

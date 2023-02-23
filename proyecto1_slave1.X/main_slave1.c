@@ -37,7 +37,7 @@ void setup(void);
 
 void main(void){
     setup();
-    TCS230_Init();
+    //TCS230_Init();
     contr = 0;
     contg = 0;
     contb = 0;
@@ -48,9 +48,16 @@ void main(void){
             PORTAbits.RA1 = 1;
             PORTAbits.RA0 = 0;
             
-            red = TCS230_Get_Value(CHANNEL_R);
-            green = TCS230_Get_Value(CHANNEL_G);
-            blue = TCS230_Get_Value(CHANNEL_B);
+            if (PORTAbits.RA3 == 1){
+                PORTCbits.RC1 = 1;
+            }
+            else {
+                PORTCbits.RC1 = 0;
+            }
+            
+            //red = TCS230_Get_Value(CHANNEL_R);
+            //green = TCS230_Get_Value(CHANNEL_G);
+            //blue = TCS230_Get_Value(CHANNEL_B);
 
             if((red>28 && red<40) && (green>76 && green<90) && (blue>56 && blue<80))
             {
@@ -70,9 +77,8 @@ void main(void){
                 contg = contg;
                 contb = contg;
             }
-
-            __delay_ms(250);
         }
+        __delay_ms(100);
     }
 }
 
@@ -88,7 +94,8 @@ void __interrupt() isr(void){ //Interrupciones
         }
         if(I2C_Read_Mode() == 1) //Revisar si se quiere enviar al maestro
         {
-            if (recibido == 0){
+            I2C_Write_Slave(cont);
+            /*if (recibido == 0){
                 I2C_Write_Slave(contr);
             }
             else if (recibido == 1){
@@ -109,16 +116,13 @@ void __interrupt() isr(void){ //Interrupciones
             else if (recibido == 5){
                 dc = 1;
                 INTCONbits.RBIE = 1;
-            }
+            }*/
         }
         PIR1bits.SSPIF = 0; //Limpiar bandera del i2c
     }
     if (INTCONbits.RBIF == 1){
         if (PORTBbits.RB4 == 1){
             cont++;
-        }
-        else if (PORTBbits.RB4 == 0){
-            cont = cont;
         }
         INTCONbits.RBIF = 0;
     }
@@ -130,16 +134,17 @@ void setup(void){
     
     TRISAbits.TRISA0 = 0;
     TRISAbits.TRISA1 = 0;
-    TRISBbits.TRISB4 = 1;
+    TRISAbits.TRISA3 = 1;
+    TRISCbits.TRISC1 = 0;
     
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
     
-    INTCONbits.RBIE = 1;
-    INTCONbits.RBIF = 0;
-    IOCBbits.IOCB4 = 1;
+    //INTCONbits.RBIE = 1;
+    //INTCONbits.RBIF = 0;
+    //IOCBbits.IOCB4 = 1;
     
     OSCCONbits.IRCF2 = 1; //Frecuencia de 8MHz
     OSCCONbits.IRCF1 = 1; 

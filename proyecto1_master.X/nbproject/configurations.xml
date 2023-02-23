@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>LCD.h</itemPath>
       <itemPath>i2c.h</itemPath>
+      <itemPath>../proyecto1_slave2.X/float_str.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -26,6 +27,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
+    <Elem>../proyecto1_slave2.X</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

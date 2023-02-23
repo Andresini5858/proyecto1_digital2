@@ -2785,21 +2785,80 @@ unsigned char I2C_Read(void);
 short I2C_Write(char data);
 # 28 "main_master.c" 2
 
+# 1 "./float_str.h" 1
+
+
+
+
+
+
+
+
+void floattostr(float numero_, unsigned char *cadena_,char decimales_);
+
+void floattostr(float numero_, unsigned char *cadena_,char decimales_)
+{
+    int largo_entera,largo_n,cont_for,tempo_int;
+    double tempo_float;
+    largo_n = decimales_+1;
+    largo_entera = 0;
+
+    if(numero_ < 0)
+    {
+        *cadena_++ = '-';
+        numero_ = -numero_;
+    }
+    if(numero_ > 0.0) while (numero_ < 1.0)
+    {
+        numero_ =numero_* 10.0;
+        largo_entera--;
+    }
+    while(numero_ >= 10.0)
+    {
+        numero_ = numero_/10.0;
+        largo_entera++;
+    }
+    largo_n = largo_n+largo_entera;
+
+    for(tempo_float = cont_for = 1; cont_for < largo_n; cont_for++)
+        tempo_float = tempo_float/10.0;
+    numero_ += tempo_float/2.0;
+    if(numero_ >= 10.0)
+    {
+        numero_ = 1.0; largo_entera++;
+    }
+    if(largo_entera<0)
+    {
+        *cadena_++ = '0'; *cadena_++ = '.';
+        if(largo_n < 0) largo_entera = largo_entera-largo_n;
+        for(cont_for = -1; cont_for > largo_entera; cont_for--) *cadena_++ = '0';
+    }
+    for(cont_for=0; cont_for < largo_n; cont_for++)
+    {
+        tempo_int = numero_;
+        *cadena_++ = tempo_int + 48;
+        if (cont_for == largo_entera ) *cadena_++ = '.';
+        numero_ -= (tempo_float=tempo_int);
+        numero_ = numero_*10.0;
+    }
+    *cadena_ = 0;
+}
+# 29 "main_master.c" 2
+
 
 
 
 uint32_t temporal;
-uint8_t estado, crc;
-uint32_t tmp1, tmp2, hum1, hum2, th, tmp3, temperatura1;
-uint8_t dec, uni, deci, cent;
+uint8_t estado;
+uint32_t tmp1, tmp2, hum1, hum2, th, tmp3;
 uint8_t dec2, uni2, deci2, cent2;
 uint8_t distancia;
 uint8_t contr, contg, contb, cont;
-float temperatura = 0.0;
+uint32_t t, h;
 float humedad = 0.0;
 uint8_t segundos, minutos, horas, dia, mes, ano;
-char buffer[20];
-char temp[5];
+char buffer[30];
+char buffer2[48];
 
 void setup(void);
 void Set_sec(uint8_t sec);
@@ -2816,15 +2875,15 @@ uint8_t Dec_to_Bcd(uint8_t dec_number);
 uint8_t Bcd_to_Dec(uint8_t bcd);
 void AHT10_Init(void);
 void AHT10_Soft_Reset(void);
-void AHT10_Trigger(void);
 void AHT10_Read(void);
-
 void Slave1_Total(void);
 void Slave1_Red(void);
 void Slave1_Blue(void);
 void Slave1_Green(void);
 void Slave_Overheat(void);
 void Slave2(void);
+void floatToString(float value, char* buffer, int decimalPlaces);
+void uint32_to_string(uint32_t value, char* buffer, uint8_t buffer_size);
 
 void main(void) {
     setup();
@@ -2832,49 +2891,45 @@ void main(void) {
     Lcd_Clear();
     Lcd_Set_Cursor(1,10);
     Lcd_Write_String("T:");
+    AHT10_Soft_Reset();
+    AHT10_Init();
     Set_sec(0);
     Set_min(0);
     Set_hour(0);
     Set_day(20);
     Set_month(2);
     Set_year(23);
-    AHT10_Init();
-
     while(1){
         Read_Time(&segundos, &minutos, &horas);
         Read_Fecha(&dia, &mes, &ano);
-        AHT10_Soft_Reset();
-
-        AHT10_Trigger();
         AHT10_Read();
-
-        Lcd_Set_Cursor(1, 11);
-
-        temperatura1 = (temperatura * 100) / 1;
-        dec = temperatura1 / 1000;
-        uni = (temperatura1 / 100) % 10;
-        deci = (temperatura1 / 10) % 10;
-        cent = (temperatura1 % 10);
-        sprintf(buffer, "%u ", temperatura);
-        Lcd_Write_String(buffer);
-
-
-        dec2 = distancia/1000;
-        uni2 = (distancia / 100) % 10;
-        deci2 = (distancia / 10) % 10;
-        cent2 = (distancia % 10);
-
-
-
-
-
+        Slave1_Total();
+# 100 "main_master.c"
         Lcd_Set_Cursor(1,1);
         sprintf(buffer, "%02u:%02u:%02u", horas, minutos, segundos);
         Lcd_Write_String(buffer);
 
         Lcd_Set_Cursor(2,1);
-        sprintf(buffer, "%02u/%02u/20%02u ", dia, mes, ano);
+        sprintf(buffer, "%02u/%02u/20%02u", dia, mes, ano);
         Lcd_Write_String(buffer);
+
+        Lcd_Set_Cursor(2,12);
+        sprintf(buffer, "%02u", cont);
+        Lcd_Write_String(buffer);
+    }
+}
+
+void __attribute__((picinterrupt(("")))) isr(void){
+    if (PIR1bits.TMR1IF == 1){
+        unsigned char contador = 0;
+        contador++;
+        if (contador == 2){
+            contador = 0;
+            Lcd_Shift_Right();
+        }
+        PIR1bits.TMR1IF = 0;
+        TMR1H = 0x3C;
+        TMR1L = 0xB0;
     }
 }
 
@@ -2893,8 +2948,20 @@ void setup(void){
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
-
     OSCCONbits.SCS = 1;
+
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIE1bits.TMR1IE = 1;
+    PIR1bits.TMR1IF = 0;
+
+    T1CONbits.T1CKPS1 = 1;
+    T1CONbits.T1CKPS0 = 1;
+    T1CONbits.TMR1CS = 0;
+    T1CONbits.TMR1ON = 1;
+    TMR1H = 0x3C;
+    TMR1L = 0xB0;
+
     I2C_Init_Master(0x80);
 }
 
@@ -3003,16 +3070,36 @@ uint8_t Bcd_to_Dec(uint8_t bcd){
 }
 
 void AHT10_Init(void){
+    _delay((unsigned long)((40)*(8000000/4000.0)));
+    uint8_t status;
     I2C_Start();
     I2C_Write(0x70);
-    I2C_Write(0xE1);
-    I2C_Write(0x08);
-    I2C_Write(0x00);
+    I2C_Write(0x71);
+    I2C_Restart();
+    I2C_Write(0x71);
+    status = I2C_Read();
+    I2C_Nack();
     I2C_Stop();
+
+    status = status & 0b00001000;
+
+
+        I2C_Start();
+        I2C_Write(0x70);
+        I2C_Write(0xE1);
+        I2C_Write(0x08);
+        I2C_Write(0x00);
+        I2C_Stop();
+
     _delay((unsigned long)((10)*(8000000/4000.0)));
+
 }
 
-void AHT10_Trigger(void){
+void AHT10_Read(void){
+    uint8_t data[7];
+    float temperatura;
+
+    uint8_t r;
     I2C_Start();
     I2C_Write(0x70);
     I2C_Write(0xAC);
@@ -3020,49 +3107,74 @@ void AHT10_Trigger(void){
     I2C_Write(0x00);
     I2C_Stop();
     _delay((unsigned long)((80)*(8000000/4000.0)));
-}
 
-void AHT10_Read(void){
     I2C_Start();
+    I2C_Write(0x70);
     I2C_Write(0x71);
-    estado = I2C_Read();
-
-    hum1 = I2C_Read();
-
-    hum2 = I2C_Read();
-
-    th = I2C_Read();
-
-    tmp2 = I2C_Read();
-
-    tmp1 = I2C_Read();
+    I2C_Restart();
+    I2C_Write(0x71);
+    r = I2C_Read();
     I2C_Nack();
     I2C_Stop();
 
-    tmp3 = (th << 16);
-    tmp2 = (tmp2 << 8);
-    temporal = (tmp3) | (tmp2) | (tmp1);
-    temperatura = (temporal/1048576)*200-50;
+    r = r & 0b00000000;
+    while (r != 0b00000000);
 
+    I2C_Start();
+    I2C_Write(0x71);
+
+
+
+
+
+    data[0] = I2C_Read();
+    I2C_Ack();
+    data[1] = I2C_Read();
+    I2C_Ack();
+    data[2] = I2C_Read();
+    I2C_Ack();
+    data[3] = I2C_Read();
+    I2C_Ack();
+    data[4] = I2C_Read();
+    I2C_Ack();
+    data[5] = I2C_Read();
+    I2C_Ack();
+    data[6] = I2C_Read();
+    I2C_Nack();
+    I2C_Stop();
+
+
+
+
+ temperatura = (((uint32_t)data[3] & 0x0F) << 16) + ((uint16_t)data[4] << 8) + data[5];
+    temperatura = ((temperatura/1048576)*200-50);
+    floattostr(temperatura, buffer2, 2);
+    Lcd_Set_Cursor(1,12);
+    Lcd_Write_String(buffer2);
 }
 
 void AHT10_Soft_Reset(void){
+    _delay((unsigned long)((40)*(8000000/4000.0)));
     I2C_Start();
     I2C_Write(0x70);
     I2C_Write(0xBA);
     I2C_Stop();
+    _delay((unsigned long)((25)*(8000000/4000.0)));
 }
-# 339 "main_master.c"
+
 void Slave1_Total(void){
+
+
+
+
+
+
     I2C_Start();
-    I2C_Write(0x50);
-    I2C_Write(0x03);
-    I2C_Restart();
     I2C_Write(0x51);
     cont = I2C_Read();
 
     I2C_Stop();
-    _delay((unsigned long)((10)*(8000000/4000000.0)));
+    _delay((unsigned long)((100)*(8000000/4000000.0)));
 }
 
 void Slave1_Red(void){
@@ -3107,6 +3219,14 @@ void Slave1_Overheat(void){
     I2C_Write(0x04);
     I2C_Stop();
     _delay((unsigned long)((10)*(8000000/4000000.0)));
+}
+
+void Slave1_Normal_Temperature(void){
+    I2C_Start();
+    I2C_Write(0x50);
+    I2C_Write(0x05);
+    I2C_Stop();
+
 }
 
 void Slave2(void){

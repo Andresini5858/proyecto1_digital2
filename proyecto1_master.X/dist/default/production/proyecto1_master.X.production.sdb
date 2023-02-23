@@ -3,34 +3,32 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
-"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\__lldiv.c
-[v ___lldiv __lldiv `(ul  1 e 4 0 ]
-"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
-"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awmod.c
-[v ___awmod __awmod `(i  1 e 2 0 ]
+"11 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X/float_str.h
+[v _floattostr floattostr `(v  1 e 1 0 ]
 "505 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
+"4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\flge.c
+[v ___flge __flge `(b  1 e 0 0 ]
+"15 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\flneg.c
+[v ___flneg __flneg `(d  1 e 4 0 ]
 "43 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\fltol.c
 [v ___fltol __fltol `(l  1 e 4 0 ]
 "8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\isdigit.c
 [v _isdigit isdigit `(b  1 e 0 0 ]
-"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\llmod.c
-[v ___llmod __llmod `(ul  1 e 4 0 ]
 "5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 "5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
 "10 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
+"242
+[v ___flsub __flsub `(d  1 e 4 0 ]
 "8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcdiv.c
 [v ___fldiv __fldiv `(d  1 e 4 0 ]
 "8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 "15 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
-"15 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul32.c
-[v ___lmul __lmul `(ul  1 e 4 0 ]
 "4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8.c
 [v ___bmul __bmul `(uc  1 e 1 0 ]
 "4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8_16.c
@@ -49,6 +47,8 @@
 [v _I2C_Stop I2C_Stop `(v  1 e 1 0 ]
 "41
 [v _I2C_Restart I2C_Restart `(v  1 e 1 0 ]
+"48
+[v _I2C_Ack I2C_Ack `(v  1 e 1 0 ]
 "56
 [v _I2C_Nack I2C_Nack `(v  1 e 1 0 ]
 "64
@@ -57,8 +57,10 @@
 [v _I2C_Read I2C_Read `(uc  1 e 1 0 ]
 "13 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\LCD.c
 [v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
+[v i1_Lcd_Port Lcd_Port `(v  1 e 1 0 ]
 "35
 [v _Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
+[v i1_Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
 "43
 [v _Lcd_Clear Lcd_Clear `(v  1 e 1 0 ]
 "48
@@ -69,45 +71,49 @@
 [v _Lcd_Write_Char Lcd_Write_Char `(v  1 e 1 0 ]
 "98
 [v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
+"104
+[v _Lcd_Shift_Right Lcd_Shift_Right `(v  1 e 1 0 ]
 "70 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
 [v _main main `(v  1 e 1 0 ]
-"122
+"114
+[v _isr isr `II(v  1 e 1 0 ]
+"128
 [v _setup setup `(v  1 e 1 0 ]
-"142
+"160
 [v _Read Read `(uc  1 e 1 0 ]
-"156
+"174
 [v _Read_Time Read_Time `(v  1 e 1 0 ]
-"162
+"180
 [v _Read_Fecha Read_Fecha `(v  1 e 1 0 ]
-"168
+"186
 [v _Set_sec Set_sec `(v  1 e 1 0 ]
-"176
+"194
 [v _Set_min Set_min `(v  1 e 1 0 ]
-"184
+"202
 [v _Set_hour Set_hour `(v  1 e 1 0 ]
-"200
+"218
 [v _Set_day Set_day `(v  1 e 1 0 ]
-"208
+"226
 [v _Set_month Set_month `(v  1 e 1 0 ]
-"216
+"234
 [v _Set_year Set_year `(v  1 e 1 0 ]
-"224
+"242
 [v _Dec_to_Bcd Dec_to_Bcd `(uc  1 e 1 0 ]
-"240
+"258
 [v _Bcd_to_Dec Bcd_to_Dec `(uc  1 e 1 0 ]
-"246
+"264
 [v _AHT10_Init AHT10_Init `(v  1 e 1 0 ]
-"256
-[v _AHT10_Trigger AHT10_Trigger `(v  1 e 1 0 ]
-"266
-[v _AHT10_Read AHT10_Read `(v  1 e 1 0 ]
 "290
+[v _AHT10_Read AHT10_Read `(v  1 e 1 0 ]
+"348
 [v _AHT10_Soft_Reset AHT10_Soft_Reset `(v  1 e 1 0 ]
+"357
+[v _Slave1_Total Slave1_Total `(v  1 e 1 0 ]
 "167 E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
 "229
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
-[s S285 . 1 `uc 1 RB0 1 0 :1:0 
+[s S459 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -117,13 +123,13 @@
 `uc 1 RB7 1 0 :1:7 
 ]
 "246
-[u S294 . 1 `S285 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES294  1 e 1 @6 ]
+[u S468 . 1 `S459 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES468  1 e 1 @6 ]
 "291
 [v _PORTC PORTC `VEuc  1 e 1 @7 ]
 "353
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
-[s S306 . 1 `uc 1 RD0 1 0 :1:0 
+[s S480 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -133,9 +139,26 @@
 `uc 1 RD7 1 0 :1:7 
 ]
 "370
-[u S315 . 1 `S306 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES315  1 e 1 @8 ]
-[s S415 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S489 . 1 `S480 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES489  1 e 1 @8 ]
+[s S170 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"483
+[s S179 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 TMR0IE 1 0 :1:5 
+]
+[u S184 . 1 `S170 1 . 1 0 `S179 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES184  1 e 1 @11 ]
+[s S111 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -144,15 +167,41 @@
 `uc 1 ADIF 1 0 :1:6 
 ]
 "554
-[u S423 . 1 `S415 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES423  1 e 1 @12 ]
+[u S119 . 1 `S111 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES119  1 e 1 @12 ]
+"658
+[v _TMR1L TMR1L `VEuc  1 e 1 @14 ]
+"665
+[v _TMR1H TMR1H `VEuc  1 e 1 @15 ]
+[s S221 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 TMR1CS 1 0 :1:1 
+`uc 1 nT1SYNC 1 0 :1:2 
+`uc 1 T1OSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 TMR1GE 1 0 :1:6 
+`uc 1 T1GINV 1 0 :1:7 
+]
+"701
+[s S229 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T1INSYNC 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 T1GIV 1 0 :1:7 
+]
+[s S237 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T1SYNC 1 0 :1:2 
+]
+[u S240 . 1 `S221 1 . 1 0 `S229 1 . 1 0 `S237 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES240  1 e 1 @16 ]
 "844
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "851
 [v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
 "1479
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
-[s S369 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S543 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -162,27 +211,38 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1558
-[u S378 . 1 `S369 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES378  1 e 1 @135 ]
+[u S552 . 1 `S543 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES552  1 e 1 @135 ]
 "1603
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
-[s S119 . 1 `uc 1 SCS 1 0 :1:0 
+[s S202 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+]
+"1719
+[u S210 . 1 `S202 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES210  1 e 1 @140 ]
+[s S144 . 1 `uc 1 SCS 1 0 :1:0 
 `uc 1 LTS 1 0 :1:1 
 `uc 1 HTS 1 0 :1:2 
 `uc 1 OSTS 1 0 :1:3 
 `uc 1 IRCF 1 0 :3:4 
 ]
 "1883
-[s S125 . 1 `uc 1 . 1 0 :4:0 
+[s S150 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 IRCF0 1 0 :1:4 
 `uc 1 IRCF1 1 0 :1:5 
 `uc 1 IRCF2 1 0 :1:6 
 ]
-[u S130 . 1 `S119 1 . 1 0 `S125 1 . 1 0 ]
-[v _OSCCONbits OSCCONbits `VES130  1 e 1 @143 ]
+[u S155 . 1 `S144 1 . 1 0 `S150 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES155  1 e 1 @143 ]
 "1980
 [v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
-[s S394 . 1 `uc 1 SEN 1 0 :1:0 
+[s S568 . 1 `uc 1 SEN 1 0 :1:0 
 `uc 1 RSEN 1 0 :1:1 
 `uc 1 PEN 1 0 :1:2 
 `uc 1 RCEN 1 0 :1:3 
@@ -192,8 +252,8 @@
 `uc 1 GCEN 1 0 :1:7 
 ]
 "1997
-[u S403 . 1 `S394 1 . 1 0 ]
-[v _SSPCON2bits SSPCON2bits `VES403  1 e 1 @145 ]
+[u S577 . 1 `S568 1 . 1 0 ]
+[v _SSPCON2bits SSPCON2bits `VES577  1 e 1 @145 ]
 "2049
 [v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
 "2178
@@ -204,34 +264,10 @@
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
 "358 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\doprnt.c
 [v _dpowers dpowers `DC[5]ui  1 s 10 dpowers ]
-"32 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
-[v _temporal temporal `ul  1 e 4 0 ]
-"33
-[v _estado estado `uc  1 e 1 0 ]
-"34
-[v _tmp1 tmp1 `ul  1 e 4 0 ]
-[v _tmp2 tmp2 `ul  1 e 4 0 ]
-[v _hum1 hum1 `ul  1 e 4 0 ]
-[v _hum2 hum2 `ul  1 e 4 0 ]
-[v _th th `ul  1 e 4 0 ]
-[v _tmp3 tmp3 `ul  1 e 4 0 ]
-[v _temperatura1 temperatura1 `ul  1 e 4 0 ]
-"35
-[v _dec dec `uc  1 e 1 0 ]
-[v _uni uni `uc  1 e 1 0 ]
-[v _deci deci `uc  1 e 1 0 ]
-[v _cent cent `uc  1 e 1 0 ]
-"36
-[v _dec2 dec2 `uc  1 e 1 0 ]
-[v _uni2 uni2 `uc  1 e 1 0 ]
-[v _deci2 deci2 `uc  1 e 1 0 ]
-[v _cent2 cent2 `uc  1 e 1 0 ]
-"37
+"37 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
 [v _distancia distancia `uc  1 e 1 0 ]
 "38
 [v _cont cont `uc  1 e 1 0 ]
-"39
-[v _temperatura temperatura `f  1 e 4 0 ]
 "41
 [v _segundos segundos `uc  1 e 1 0 ]
 [v _minutos minutos `uc  1 e 1 0 ]
@@ -240,33 +276,35 @@
 [v _mes mes `uc  1 e 1 0 ]
 [v _ano ano `uc  1 e 1 0 ]
 "42
-[v _buffer buffer `[20]uc  1 e 20 0 ]
+[v _buffer buffer `[30]uc  1 e 30 0 ]
+"43
+[v _buffer2 buffer2 `[48]uc  1 e 48 0 ]
 "70
 [v _main main `(v  1 e 1 0 ]
 {
-"120
+"112
 } 0
 "505 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
-[v sprintf@sp sp `*.4uc  1 a 1 wreg ]
+[v sprintf@sp sp `*.5uc  1 a 1 wreg ]
 "514
-[v sprintf@width width `i  1 a 2 16 ]
+[v sprintf@width width `i  1 a 2 30 ]
 "545
-[v sprintf@val val `ui  1 a 2 12 ]
+[v sprintf@val val `ui  1 a 2 26 ]
 "512
-[v sprintf@c c `uc  1 a 1 18 ]
+[v sprintf@c c `uc  1 a 1 32 ]
 "521
-[v sprintf@prec prec `c  1 a 1 14 ]
+[v sprintf@prec prec `c  1 a 1 28 ]
 "525
-[v sprintf@flag flag `uc  1 a 1 11 ]
+[v sprintf@flag flag `uc  1 a 1 25 ]
 "507
-[v sprintf@ap ap `[1]*.4v  1 a 1 10 ]
+[v sprintf@ap ap `[1]*.4v  1 a 1 24 ]
 "505
-[v sprintf@sp sp `*.4uc  1 a 1 wreg ]
-[v sprintf@f f `*.24DCuc  1 p 1 0 ]
+[v sprintf@sp sp `*.5uc  1 a 1 wreg ]
+[v sprintf@f f `*.24DCuc  1 p 1 14 ]
 "550
-[v sprintf@sp sp `*.4uc  1 a 1 15 ]
+[v sprintf@sp sp `*.5uc  1 a 1 29 ]
 "1567
 } 0
 "8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\isdigit.c
@@ -310,10 +348,10 @@
 [v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
 "30
 } 0
-"122 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
+"128 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"140
+"158
 } 0
 "12 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\i2c.c
 [v _I2C_Init_Master I2C_Init_Master `(v  1 e 1 0 ]
@@ -324,61 +362,244 @@
 [v I2C_Init_Master@sp_i2c sp_i2c `uc  1 a 1 0 ]
 "25
 } 0
-"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\llmod.c
-[v ___llmod __llmod `(ul  1 e 4 0 ]
+"357 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
+[v _Slave1_Total Slave1_Total `(v  1 e 1 0 ]
 {
-"10
-[v ___llmod@counter counter `uc  1 a 1 9 ]
-"5
-[v ___llmod@divisor divisor `ul  1 p 4 0 ]
-[v ___llmod@dividend dividend `ul  1 p 4 4 ]
-"25
+"370
 } 0
-"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\__lldiv.c
-[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"234
+[v _Set_year Set_year `(v  1 e 1 0 ]
 {
-"10
-[v ___lldiv@quotient quotient `ul  1 a 4 9 ]
+[v Set_year@year year `uc  1 a 1 wreg ]
+[v Set_year@year year `uc  1 a 1 wreg ]
+[v Set_year@year year `uc  1 a 1 2 ]
+"240
+} 0
+"186
+[v _Set_sec Set_sec `(v  1 e 1 0 ]
+{
+[v Set_sec@sec sec `uc  1 a 1 wreg ]
+[v Set_sec@sec sec `uc  1 a 1 wreg ]
+[v Set_sec@sec sec `uc  1 a 1 2 ]
+"192
+} 0
+"226
+[v _Set_month Set_month `(v  1 e 1 0 ]
+{
+[v Set_month@month month `uc  1 a 1 wreg ]
+[v Set_month@month month `uc  1 a 1 wreg ]
+[v Set_month@month month `uc  1 a 1 2 ]
+"232
+} 0
+"194
+[v _Set_min Set_min `(v  1 e 1 0 ]
+{
+[v Set_min@min min `uc  1 a 1 wreg ]
+[v Set_min@min min `uc  1 a 1 wreg ]
+[v Set_min@min min `uc  1 a 1 2 ]
+"200
+} 0
+"202
+[v _Set_hour Set_hour `(v  1 e 1 0 ]
+{
+[v Set_hour@hour hour `uc  1 a 1 wreg ]
+[v Set_hour@hour hour `uc  1 a 1 wreg ]
+[v Set_hour@hour hour `uc  1 a 1 2 ]
+"208
+} 0
+"218
+[v _Set_day Set_day `(v  1 e 1 0 ]
+{
+[v Set_day@day day `uc  1 a 1 wreg ]
+[v Set_day@day day `uc  1 a 1 wreg ]
+[v Set_day@day day `uc  1 a 1 2 ]
+"224
+} 0
+"242
+[v _Dec_to_Bcd Dec_to_Bcd `(uc  1 e 1 0 ]
+{
+[v Dec_to_Bcd@dec_number dec_number `uc  1 a 1 wreg ]
+"243
+[v Dec_to_Bcd@bcd_number bcd_number `uc  1 a 1 1 ]
+"242
+[v Dec_to_Bcd@dec_number dec_number `uc  1 a 1 wreg ]
+"244
+[v Dec_to_Bcd@dec_number dec_number `uc  1 a 1 0 ]
+"256
+} 0
+"174
+[v _Read_Time Read_Time `(v  1 e 1 0 ]
+{
+[v Read_Time@s s `*.4uc  1 a 1 wreg ]
+[v Read_Time@s s `*.4uc  1 a 1 wreg ]
+[v Read_Time@m m `*.4uc  1 p 1 8 ]
+[v Read_Time@h h `*.4uc  1 p 1 9 ]
+[v Read_Time@s s `*.4uc  1 a 1 10 ]
+"178
+} 0
+"180
+[v _Read_Fecha Read_Fecha `(v  1 e 1 0 ]
+{
+[v Read_Fecha@d d `*.4uc  1 a 1 wreg ]
+[v Read_Fecha@d d `*.4uc  1 a 1 wreg ]
+[v Read_Fecha@mo mo `*.4uc  1 p 1 8 ]
+[v Read_Fecha@y y `*.4uc  1 p 1 9 ]
+[v Read_Fecha@d d `*.4uc  1 a 1 10 ]
+"184
+} 0
+"160
+[v _Read Read `(uc  1 e 1 0 ]
+{
+[v Read@address address `uc  1 a 1 wreg ]
+"161
+[v Read@dato dato `uc  1 a 1 3 ]
+"160
+[v Read@address address `uc  1 a 1 wreg ]
+[v Read@address address `uc  1 a 1 2 ]
+"172
+} 0
+"258
+[v _Bcd_to_Dec Bcd_to_Dec `(uc  1 e 1 0 ]
+{
+[v Bcd_to_Dec@bcd bcd `uc  1 a 1 wreg ]
+"259
+[v Bcd_to_Dec@dec dec `uc  1 a 1 6 ]
+"258
+[v Bcd_to_Dec@bcd bcd `uc  1 a 1 wreg ]
+"260
+[v Bcd_to_Dec@bcd bcd `uc  1 a 1 7 ]
+"262
+} 0
+"4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8.c
+[v ___bmul __bmul `(uc  1 e 1 0 ]
+{
+[v ___bmul@multiplier multiplier `uc  1 a 1 wreg ]
+"6
+[v ___bmul@product product `uc  1 a 1 2 ]
+"4
+[v ___bmul@multiplier multiplier `uc  1 a 1 wreg ]
+[v ___bmul@multiplicand multiplicand `uc  1 p 1 0 ]
+"6
+[v ___bmul@multiplier multiplier `uc  1 a 1 3 ]
+"51
+} 0
+"65 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\LCD.c
+[v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
+{
+"81
+} 0
+"43
+[v _Lcd_Clear Lcd_Clear `(v  1 e 1 0 ]
+{
+"46
+} 0
+"348 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
+[v _AHT10_Soft_Reset AHT10_Soft_Reset `(v  1 e 1 0 ]
+{
+"355
+} 0
+"290
+[v _AHT10_Read AHT10_Read `(v  1 e 1 0 ]
+{
+"291
+[v AHT10_Read@data data `[7]uc  1 a 7 33 ]
+"292
+[v AHT10_Read@temperatura temperatura `f  1 a 4 40 ]
+"346
+} 0
+"11 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X/float_str.h
+[v _floattostr floattostr `(v  1 e 1 0 ]
+{
+"14
+[v floattostr@tempo_float tempo_float `d  1 a 4 9 ]
+"13
+[v floattostr@largo_entera largo_entera `i  1 a 2 17 ]
+[v floattostr@cont_for cont_for `i  1 a 2 15 ]
+[v floattostr@largo_n largo_n `i  1 a 2 13 ]
+[v floattostr@tempo_int tempo_int `i  1 a 2 7 ]
 "11
-[v ___lldiv@counter counter `uc  1 a 1 13 ]
-"5
-[v ___lldiv@divisor divisor `ul  1 p 4 0 ]
-[v ___lldiv@dividend dividend `ul  1 p 4 4 ]
-"30
+[v floattostr@numero_ numero_ `f  1 p 4 0 ]
+[v floattostr@cadena_ cadena_ `*.5uc  1 p 1 4 ]
+[v floattostr@decimales_ decimales_ `uc  1 p 1 5 ]
+"57
+} 0
+"10 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+{
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+"13
+[v ___xxtofl@arg arg `ul  1 a 4 10 ]
+"12
+[v ___xxtofl@exp exp `uc  1 a 1 9 ]
+"10
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+[v ___xxtofl@val val `l  1 p 4 0 ]
+"15
+[v ___xxtofl@sign sign `uc  1 a 1 8 ]
+"44
 } 0
 "43 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\fltol.c
 [v ___fltol __fltol `(l  1 e 4 0 ]
 {
 "45
-[v ___fltol@exp1 exp1 `uc  1 a 1 56 ]
-[v ___fltol@sign1 sign1 `uc  1 a 1 55 ]
+[v ___fltol@exp1 exp1 `uc  1 a 1 9 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 8 ]
 "43
-[v ___fltol@f1 f1 `d  1 p 4 47 ]
+[v ___fltol@f1 f1 `d  1 p 4 0 ]
 "70
+} 0
+"242 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcadd.c
+[v ___flsub __flsub `(d  1 e 4 0 ]
+{
+[v ___flsub@a a `d  1 p 4 72 ]
+[v ___flsub@b b `d  1 p 4 76 ]
+"250
+} 0
+"10
+[v ___fladd __fladd `(d  1 e 4 0 ]
+{
+"17
+[v ___fladd@grs grs `uc  1 a 1 71 ]
+"15
+[v ___fladd@bexp bexp `uc  1 a 1 70 ]
+"16
+[v ___fladd@aexp aexp `uc  1 a 1 69 ]
+"13
+[v ___fladd@signs signs `uc  1 a 1 68 ]
+"10
+[v ___fladd@b b `d  1 p 4 52 ]
+[v ___fladd@a a `d  1 p 4 56 ]
+"237
+} 0
+"15 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\flneg.c
+[v ___flneg __flneg `(d  1 e 4 0 ]
+{
+[v ___flneg@f1 f1 `d  1 p 4 0 ]
+"20
 } 0
 "8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S795 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S932 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S800 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S803 . 4 `l 1 i 4 0 `d 1 f 4 0 `S795 1 fAsBytes 4 0 `S800 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S803  1 a 4 15 ]
+[s S937 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S940 . 4 `l 1 i 4 0 `d 1 f 4 0 `S932 1 fAsBytes 4 0 `S937 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S940  1 a 4 46 ]
 "12
-[v ___flmul@grs grs `ul  1 a 4 9 ]
-[s S872 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[v ___flmul@grs grs `ul  1 a 4 40 ]
+[s S1009 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S875 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S872 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S875  1 a 2 19 ]
+[u S1012 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1009 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1012  1 a 2 50 ]
 "10
-[v ___flmul@bexp bexp `uc  1 a 1 14 ]
+[v ___flmul@bexp bexp `uc  1 a 1 45 ]
 "11
-[v ___flmul@aexp aexp `uc  1 a 1 13 ]
+[v ___flmul@aexp aexp `uc  1 a 1 44 ]
 "9
-[v ___flmul@sign sign `uc  1 a 1 8 ]
+[v ___flmul@sign sign `uc  1 a 1 39 ]
 "8
-[v ___flmul@b b `d  1 p 4 0 ]
-[v ___flmul@a a `d  1 p 4 4 ]
+[v ___flmul@b b `d  1 p 4 26 ]
+[v ___flmul@a a `d  1 p 4 30 ]
 "205
 } 0
 "4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8_16.c
@@ -395,170 +616,32 @@
 [v __Umul8_16@multiplier multiplier `uc  1 a 1 8 ]
 "60
 } 0
+"4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\flge.c
+[v ___flge __flge `(b  1 e 0 0 ]
+{
+[v ___flge@ff1 ff1 `d  1 p 4 0 ]
+[v ___flge@ff2 ff2 `d  1 p 4 4 ]
+"19
+} 0
 "8 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcdiv.c
 [v ___fldiv __fldiv `(d  1 e 4 0 ]
 {
 "21
-[v ___fldiv@grs grs `ul  1 a 4 41 ]
+[v ___fldiv@grs grs `ul  1 a 4 20 ]
 "22
-[v ___fldiv@rem rem `ul  1 a 4 34 ]
+[v ___fldiv@rem rem `ul  1 a 4 13 ]
 "20
-[v ___fldiv@new_exp new_exp `i  1 a 2 39 ]
+[v ___fldiv@new_exp new_exp `i  1 a 2 18 ]
 "19
-[v ___fldiv@aexp aexp `uc  1 a 1 46 ]
+[v ___fldiv@aexp aexp `uc  1 a 1 25 ]
 "18
-[v ___fldiv@bexp bexp `uc  1 a 1 45 ]
+[v ___fldiv@bexp bexp `uc  1 a 1 24 ]
 "16
-[v ___fldiv@sign sign `uc  1 a 1 38 ]
+[v ___fldiv@sign sign `uc  1 a 1 17 ]
 "8
-[v ___fldiv@a a `d  1 p 4 21 ]
-[v ___fldiv@b b `d  1 p 4 25 ]
+[v ___fldiv@a a `d  1 p 4 0 ]
+[v ___fldiv@b b `d  1 p 4 4 ]
 "185
-} 0
-"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awmod.c
-[v ___awmod __awmod `(i  1 e 2 0 ]
-{
-"10
-[v ___awmod@sign sign `uc  1 a 1 1 ]
-[v ___awmod@counter counter `uc  1 a 1 0 ]
-"5
-[v ___awmod@divisor divisor `i  1 p 2 9 ]
-[v ___awmod@dividend dividend `i  1 p 2 11 ]
-"34
-} 0
-"5 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
-{
-"10
-[v ___awdiv@quotient quotient `i  1 a 2 7 ]
-"11
-[v ___awdiv@sign sign `uc  1 a 1 6 ]
-[v ___awdiv@counter counter `uc  1 a 1 5 ]
-"5
-[v ___awdiv@divisor divisor `i  1 p 2 0 ]
-[v ___awdiv@dividend dividend `i  1 p 2 2 ]
-"41
-} 0
-"216 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
-[v _Set_year Set_year `(v  1 e 1 0 ]
-{
-[v Set_year@year year `uc  1 a 1 wreg ]
-[v Set_year@year year `uc  1 a 1 wreg ]
-[v Set_year@year year `uc  1 a 1 2 ]
-"222
-} 0
-"168
-[v _Set_sec Set_sec `(v  1 e 1 0 ]
-{
-[v Set_sec@sec sec `uc  1 a 1 wreg ]
-[v Set_sec@sec sec `uc  1 a 1 wreg ]
-[v Set_sec@sec sec `uc  1 a 1 2 ]
-"174
-} 0
-"208
-[v _Set_month Set_month `(v  1 e 1 0 ]
-{
-[v Set_month@month month `uc  1 a 1 wreg ]
-[v Set_month@month month `uc  1 a 1 wreg ]
-[v Set_month@month month `uc  1 a 1 2 ]
-"214
-} 0
-"176
-[v _Set_min Set_min `(v  1 e 1 0 ]
-{
-[v Set_min@min min `uc  1 a 1 wreg ]
-[v Set_min@min min `uc  1 a 1 wreg ]
-[v Set_min@min min `uc  1 a 1 2 ]
-"182
-} 0
-"184
-[v _Set_hour Set_hour `(v  1 e 1 0 ]
-{
-[v Set_hour@hour hour `uc  1 a 1 wreg ]
-[v Set_hour@hour hour `uc  1 a 1 wreg ]
-[v Set_hour@hour hour `uc  1 a 1 2 ]
-"190
-} 0
-"200
-[v _Set_day Set_day `(v  1 e 1 0 ]
-{
-[v Set_day@day day `uc  1 a 1 wreg ]
-[v Set_day@day day `uc  1 a 1 wreg ]
-[v Set_day@day day `uc  1 a 1 2 ]
-"206
-} 0
-"224
-[v _Dec_to_Bcd Dec_to_Bcd `(uc  1 e 1 0 ]
-{
-[v Dec_to_Bcd@dec_number dec_number `uc  1 a 1 wreg ]
-"225
-[v Dec_to_Bcd@bcd_number bcd_number `uc  1 a 1 1 ]
-"224
-[v Dec_to_Bcd@dec_number dec_number `uc  1 a 1 wreg ]
-"226
-[v Dec_to_Bcd@dec_number dec_number `uc  1 a 1 0 ]
-"238
-} 0
-"156
-[v _Read_Time Read_Time `(v  1 e 1 0 ]
-{
-[v Read_Time@s s `*.4uc  1 a 1 wreg ]
-[v Read_Time@s s `*.4uc  1 a 1 wreg ]
-[v Read_Time@m m `*.4uc  1 p 1 8 ]
-[v Read_Time@h h `*.4uc  1 p 1 9 ]
-[v Read_Time@s s `*.4uc  1 a 1 10 ]
-"160
-} 0
-"162
-[v _Read_Fecha Read_Fecha `(v  1 e 1 0 ]
-{
-[v Read_Fecha@d d `*.4uc  1 a 1 wreg ]
-[v Read_Fecha@d d `*.4uc  1 a 1 wreg ]
-[v Read_Fecha@mo mo `*.4uc  1 p 1 8 ]
-[v Read_Fecha@y y `*.4uc  1 p 1 9 ]
-[v Read_Fecha@d d `*.4uc  1 a 1 10 ]
-"166
-} 0
-"142
-[v _Read Read `(uc  1 e 1 0 ]
-{
-[v Read@address address `uc  1 a 1 wreg ]
-"143
-[v Read@dato dato `uc  1 a 1 3 ]
-"142
-[v Read@address address `uc  1 a 1 wreg ]
-[v Read@address address `uc  1 a 1 2 ]
-"154
-} 0
-"41 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\i2c.c
-[v _I2C_Restart I2C_Restart `(v  1 e 1 0 ]
-{
-"46
-} 0
-"240 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
-[v _Bcd_to_Dec Bcd_to_Dec `(uc  1 e 1 0 ]
-{
-[v Bcd_to_Dec@bcd bcd `uc  1 a 1 wreg ]
-"241
-[v Bcd_to_Dec@dec dec `uc  1 a 1 6 ]
-"240
-[v Bcd_to_Dec@bcd bcd `uc  1 a 1 wreg ]
-"242
-[v Bcd_to_Dec@bcd bcd `uc  1 a 1 7 ]
-"244
-} 0
-"4 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8.c
-[v ___bmul __bmul `(uc  1 e 1 0 ]
-{
-[v ___bmul@multiplier multiplier `uc  1 a 1 wreg ]
-"6
-[v ___bmul@product product `uc  1 a 1 2 ]
-"4
-[v ___bmul@multiplier multiplier `uc  1 a 1 wreg ]
-[v ___bmul@multiplicand multiplicand `uc  1 p 1 0 ]
-"6
-[v ___bmul@multiplier multiplier `uc  1 a 1 3 ]
-"51
 } 0
 "98 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\LCD.c
 [v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
@@ -597,16 +680,6 @@
 [v Lcd_Set_Cursor@a a `uc  1 a 1 6 ]
 "63
 } 0
-"65
-[v _Lcd_Init Lcd_Init `(v  1 e 1 0 ]
-{
-"81
-} 0
-"43
-[v _Lcd_Clear Lcd_Clear `(v  1 e 1 0 ]
-{
-"46
-} 0
 "35
 [v _Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
 {
@@ -623,60 +696,17 @@
 [v Lcd_Port@a a `uc  1 a 1 0 ]
 "33
 } 0
-"256 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
-[v _AHT10_Trigger AHT10_Trigger `(v  1 e 1 0 ]
+"48 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\i2c.c
+[v _I2C_Ack I2C_Ack `(v  1 e 1 0 ]
 {
-"264
+"54
 } 0
-"290
-[v _AHT10_Soft_Reset AHT10_Soft_Reset `(v  1 e 1 0 ]
-{
-"295
-} 0
-"266
-[v _AHT10_Read AHT10_Read `(v  1 e 1 0 ]
-{
-"288
-} 0
-"10 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\xxtofl.c
-[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
-{
-[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
-"13
-[v ___xxtofl@arg arg `ul  1 a 4 10 ]
-"12
-[v ___xxtofl@exp exp `uc  1 a 1 9 ]
-"10
-[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
-[v ___xxtofl@val val `l  1 p 4 0 ]
-"15
-[v ___xxtofl@sign sign `uc  1 a 1 8 ]
-"44
-} 0
-"15 E:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul32.c
-[v ___lmul __lmul `(ul  1 e 4 0 ]
-{
-"17
-[v ___lmul@product product `ul  1 a 4 9 ]
-"15
-[v ___lmul@multiplier multiplier `ul  1 p 4 0 ]
-[v ___lmul@multiplicand multiplicand `ul  1 p 4 4 ]
-"129
-} 0
-"73 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\i2c.c
-[v _I2C_Read I2C_Read `(uc  1 e 1 0 ]
-{
-"79
-} 0
-"56
-[v _I2C_Nack I2C_Nack `(v  1 e 1 0 ]
-{
-"62
-} 0
-"246 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
+"264 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
 [v _AHT10_Init AHT10_Init `(v  1 e 1 0 ]
 {
-"254
+"266
+[v AHT10_Init@status status `uc  1 a 1 3 ]
+"288
 } 0
 "64 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\i2c.c
 [v _I2C_Write I2C_Write `(s  1 e 2 0 ]
@@ -696,4 +726,47 @@
 [v _I2C_Start I2C_Start `(v  1 e 1 0 ]
 {
 "32
+} 0
+"41
+[v _I2C_Restart I2C_Restart `(v  1 e 1 0 ]
+{
+"46
+} 0
+"73
+[v _I2C_Read I2C_Read `(uc  1 e 1 0 ]
+{
+"79
+} 0
+"56
+[v _I2C_Nack I2C_Nack `(v  1 e 1 0 ]
+{
+"62
+} 0
+"114 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\main_master.c
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"116
+[v isr@contador contador `uc  1 a 1 7 ]
+"126
+} 0
+"104 C:\Users\lemus\Documents\GitHub\proyecto1_digital2\proyecto1_master.X\LCD.c
+[v _Lcd_Shift_Right Lcd_Shift_Right `(v  1 e 1 0 ]
+{
+"107
+} 0
+"35
+[v i1_Lcd_Cmd Lcd_Cmd `(v  1 e 1 0 ]
+{
+[v i1Lcd_Cmd@a a `uc  1 a 1 wreg ]
+[v i1Lcd_Cmd@a a `uc  1 a 1 wreg ]
+[v i1Lcd_Cmd@a a `uc  1 a 1 3 ]
+"41
+} 0
+"13
+[v i1_Lcd_Port Lcd_Port `(v  1 e 1 0 ]
+{
+[v i1Lcd_Port@a a `uc  1 a 1 wreg ]
+[v i1Lcd_Port@a a `uc  1 a 1 wreg ]
+[v i1Lcd_Port@a a `uc  1 a 1 0 ]
+"33
 } 0

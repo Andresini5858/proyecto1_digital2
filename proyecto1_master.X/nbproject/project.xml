@@ -14,6 +14,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem>../proyecto1_slave2.X</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

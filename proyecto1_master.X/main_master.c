@@ -26,21 +26,21 @@
 #include <stdio.h>
 #include "LCD.h" //librería LCD
 #include "i2c.h" //Librería I2C
+#include "float_str.h"
 
 #define _XTAL_FREQ 8000000 //Frecuencia 8MHz
 
 uint32_t temporal;
-uint8_t estado, crc;
-uint32_t tmp1, tmp2, hum1, hum2, th, tmp3, temperatura1;
-uint8_t dec, uni, deci, cent;
+uint8_t estado;
+uint32_t tmp1, tmp2, hum1, hum2, th, tmp3;
 uint8_t dec2, uni2, deci2, cent2;
 uint8_t distancia;
 uint8_t contr, contg, contb, cont;
-float temperatura = 0.0;
+uint32_t t, h;
 float humedad = 0.0;
 uint8_t segundos, minutos, horas, dia, mes, ano;
-char buffer[20];
-char temp[5];
+char buffer[30];
+char buffer2[48];
 
 void setup(void);
 void Set_sec(uint8_t sec); //Función para setear segundos
@@ -57,15 +57,15 @@ uint8_t Dec_to_Bcd(uint8_t dec_number); //Función para pasar de decimal a bcd
 uint8_t Bcd_to_Dec(uint8_t bcd); //Función para pasar de bcd a decimal
 void AHT10_Init(void); //Inicializar el sensor AHT10
 void AHT10_Soft_Reset(void);
-void AHT10_Trigger(void);
 void AHT10_Read(void);
-//void floatToString(float f, char* buffer, int bufferSize);
 void Slave1_Total(void);
 void Slave1_Red(void);
 void Slave1_Blue(void);
 void Slave1_Green(void);
 void Slave_Overheat(void);
 void Slave2(void);
+void floatToString(float value, char* buffer, int decimalPlaces);
+void uint32_to_string(uint32_t value, char* buffer, uint8_t buffer_size);
 
 void main(void) {
     setup();
@@ -73,37 +73,25 @@ void main(void) {
     Lcd_Clear();
     Lcd_Set_Cursor(1,10);
     Lcd_Write_String("T:");
+    AHT10_Soft_Reset();
+    AHT10_Init();
     Set_sec(0);
     Set_min(0);
     Set_hour(0);
     Set_day(20);
     Set_month(2);
-    Set_year(23);  
-    AHT10_Init();
-    
+    Set_year(23);
     while(1){
         Read_Time(&segundos, &minutos, &horas);
         Read_Fecha(&dia, &mes, &ano);
-        AHT10_Soft_Reset();
-        //__delay_ms(20);
-        AHT10_Trigger();
         AHT10_Read();
+        Slave1_Total();
         
-        Lcd_Set_Cursor(1, 11);
-        //floatToString(temperatura, temp, sizeof(temp));
-        temperatura1 = (temperatura * 100) / 1;
-        dec = temperatura1 / 1000;
-        uni = (temperatura1 / 100) % 10;
-        deci = (temperatura1 / 10) % 10;
-        cent = (temperatura1 % 10);
-        sprintf(buffer, "%u ", temperatura);
-        Lcd_Write_String(buffer);
-        //Lcd_Write_String(temp);
-        
-        dec2 = distancia/1000;
-        uni2 = (distancia / 100) % 10;
-        deci2 = (distancia / 10) % 10;
-        cent2 = (distancia % 10);
+ 
+        //dec2 = distancia/1000;
+        //uni2 = (distancia / 100) % 10;
+        //deci2 = (distancia / 10) % 10;
+        //cent2 = (distancia % 10);
         
         //Lcd_Set_Cursor(2, 12);
         //sprintf(buffer, "%d%d.%d%d ", dec2, uni2, deci2, cent2);
@@ -114,8 +102,26 @@ void main(void) {
         Lcd_Write_String(buffer);
         
         Lcd_Set_Cursor(2,1); //Cursor en 2,7
-        sprintf(buffer, "%02u/%02u/20%02u ", dia, mes, ano); //Función para pasar variables a cadena de caracteres
+        sprintf(buffer, "%02u/%02u/20%02u", dia, mes, ano); //Función para pasar variables a cadena de caracteres
         Lcd_Write_String(buffer); //Mostrar en la LCD
+        
+        Lcd_Set_Cursor(2,12);
+        sprintf(buffer, "%02u", cont);
+        Lcd_Write_String(buffer);
+    }
+}
+
+void __interrupt() isr(void){
+    if (PIR1bits.TMR1IF == 1){
+        unsigned char contador = 0;
+        contador++;
+        if (contador == 2){
+            contador = 0;   
+        }
+        Lcd_Shift_Right();
+        PIR1bits.TMR1IF = 0;
+        TMR1H = 0x3C;
+        TMR1L = 0xB0; 
     }
 }
 
@@ -134,8 +140,20 @@ void setup(void){
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
-    
     OSCCONbits.SCS = 1;
+    
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIE1bits.TMR1IE = 1;
+    PIR1bits.TMR1IF = 0;
+    
+    T1CONbits.T1CKPS1 = 1;
+    T1CONbits.T1CKPS0 = 1;
+    T1CONbits.TMR1CS = 0;
+    T1CONbits.TMR1ON = 1;
+    TMR1H = 0x3C;
+    TMR1L = 0xB0;        
+    
     I2C_Init_Master(I2C_100KHZ); //Setear I2C a 100kHz
 }
 
@@ -244,16 +262,36 @@ uint8_t Bcd_to_Dec(uint8_t bcd){ //Función para pasar números de bcd a decimal
 }
 
 void AHT10_Init(void){
+    __delay_ms(40);
+    uint8_t status;
     I2C_Start();
     I2C_Write(0x70);
-    I2C_Write(0xE1);
-    I2C_Write(0x08);
-    I2C_Write(0x00);
+    I2C_Write(0x71);
+    I2C_Restart();
+    I2C_Write(0x71);
+    status = I2C_Read();
+    I2C_Nack();
     I2C_Stop();
+    
+    status = status & 0b00001000;
+    
+    //if (status != 0b00001000){
+        I2C_Start();
+        I2C_Write(0x70);
+        I2C_Write(0xE1);
+        I2C_Write(0x08);
+        I2C_Write(0x00);
+        I2C_Stop();
+    //}
     __delay_ms(10);
+
 }
 
-void AHT10_Trigger(void){
+void AHT10_Read(void){
+    uint8_t data[7];
+    float temperatura;
+    
+    uint8_t r;
     I2C_Start();
     I2C_Write(0x70);
     I2C_Write(0xAC);
@@ -261,91 +299,74 @@ void AHT10_Trigger(void){
     I2C_Write(0x00);
     I2C_Stop();
     __delay_ms(80);
-}
-
-void AHT10_Read(void){
+    
     I2C_Start();
+    I2C_Write(0x70);
     I2C_Write(0x71);
-    estado = I2C_Read();
-    //I2C_Ack();
-    hum1 = I2C_Read();
-    //I2C_Ack();
-    hum2 = I2C_Read();
-    //I2C_Ack();
-    th = I2C_Read();
-    //I2C_Ack();
-    tmp2 = I2C_Read();
-    //I2C_Ack();
-    tmp1 = I2C_Read();
+    I2C_Restart();
+    I2C_Write(0x71);
+    r = I2C_Read();
     I2C_Nack();
     I2C_Stop();
-    //tmp3 = (th & 0b00001111); //0000 00000000 00000000
-    tmp3 = (th << 16);
-    tmp2 = (tmp2 << 8);
-    temporal = (tmp3) | (tmp2) | (tmp1);
-    temperatura = (temporal/1048576)*200-50;
-    //temperatura = ((float)(tmp1 & 0x0F) * 256.0 + (float)tmp2) / 10.0;
+    
+    r = r & 0b00000000;
+    while (r != 0b00000000);
+    
+    I2C_Start();
+    I2C_Write(0x71);
+    //for (uint8_t i = 0; i < 6; i++ ) {
+	//	data[i] = I2C_Read();
+    //    I2C_Ack();
+	//}
+    //data[6] = I2C_Read();
+    data[0] = I2C_Read();
+    I2C_Ack();
+    data[1] = I2C_Read();
+    I2C_Ack();
+    data[2] = I2C_Read();
+    I2C_Ack();
+    data[3] = I2C_Read();
+    I2C_Ack();
+    data[4] = I2C_Read();
+    I2C_Ack();
+    data[5] = I2C_Read();
+    I2C_Ack();
+    data[6] = I2C_Read();
+    I2C_Nack();
+    I2C_Stop();
+    
+    //uint32_t hum = ((uint32_t)data[1] << 12) | ((uint16_t)data[2] << 4) | (data[3] >> 4);
+	//hum = (hum * 250) >> 18;
+	//*humid = (uint16_t)hum;
+	temperatura = (((uint32_t)data[3] & 0x0F) << 16) + ((uint16_t)data[4] << 8) + data[5];
+    temperatura = ((temperatura/1048576)*200-50);
+    floattostr(temperatura, buffer2, 2);
+    Lcd_Set_Cursor(1,12);
+    Lcd_Write_String(buffer2);
 }
 
 void AHT10_Soft_Reset(void){
+    __delay_ms(40);
     I2C_Start();
     I2C_Write(0x70);
     I2C_Write(0xBA);
     I2C_Stop();
+    __delay_ms(25);
 }
 
-/*void floatToString(float f, char* buffer, int bufferSize){
-  // Handle negative numbers
-  if (f < 0.0f) {
-    f = -f;
-    *buffer++ = '-';
-    bufferSize--;
-  }
-  
-  // Extract the integer part of the float
-  int iPart = (int)f;
-  int numDigits = 0;
-  
-  do {
-    buffer[numDigits++] = '0' + iPart % 10;
-    iPart /= 10;
-  } while (iPart > 0 && numDigits < bufferSize);
-  
-  // Reverse the order of the digits
-  for (int i = 0; i < numDigits / 2; i++) {
-    char tmp = buffer[i];
-    buffer[i] = buffer[numDigits - 1 - i];
-    buffer[numDigits - 1 - i] = tmp;
-  }
-  
-  // Add decimal point and extract fractional digits
-  if (numDigits < bufferSize) {
-    buffer[numDigits++] = '.';
-    
-    // Extract the fractional part of the float
-    float fPart = f - (float)iPart;
-    while (numDigits < bufferSize && fPart > 0.0f) {
-      fPart *= 10.0f;
-      int digit = (int)fPart;
-      buffer[numDigits++] = '0' + digit;
-      fPart -= (float)digit;
-    }
-  }
-  
-  // Add terminating null character
-  buffer[numDigits] = '\0';
-}*/
-
 void Slave1_Total(void){
+    //I2C_Start();
+    //I2C_Write(0x50);
+    //I2C_Write(0x03);
+    //I2C_Stop();
+    //__delay_ms(1);
+    
     I2C_Start();
-    I2C_Write(0x50);
-    I2C_Write(0x03);
-    I2C_Restart();
     I2C_Write(0x51);
     cont = I2C_Read();
-    //NACK
+    //I2C_Nack();
     I2C_Stop();
-    __delay_us(10);  
+    __delay_us(100);  
 }
 
 void Slave1_Red(void){
@@ -392,6 +413,14 @@ void Slave1_Overheat(void){
     __delay_us(10);  
 }
 
+void Slave1_Normal_Temperature(void){
+    I2C_Start();
+    I2C_Write(0x50);
+    I2C_Write(0x05);
+    I2C_Stop();
+    
+}
+
 void Slave2(void){
     I2C_Start();
     I2C_Write(0x41);
@@ -399,4 +428,3 @@ void Slave2(void){
     I2C_Stop();
     __delay_us(10);
 }
-
