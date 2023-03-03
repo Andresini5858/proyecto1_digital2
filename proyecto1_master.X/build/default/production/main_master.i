@@ -2857,6 +2857,7 @@ uint8_t contr, contg, contb, cont;
 uint32_t t, h;
 float humedad = 0.0;
 uint8_t segundos, minutos, horas, dia, mes, ano;
+unsigned char contador = 0;
 char buffer[30];
 char buffer2[48];
 
@@ -2904,32 +2905,42 @@ void main(void) {
         Read_Fecha(&dia, &mes, &ano);
         AHT10_Read();
         Slave1_Total();
-# 100 "main_master.c"
+# 103 "main_master.c"
         Lcd_Set_Cursor(1,1);
         sprintf(buffer, "%02u:%02u:%02u", horas, minutos, segundos);
         Lcd_Write_String(buffer);
 
+
+
+
+
         Lcd_Set_Cursor(2,1);
-        sprintf(buffer, "%02u/%02u/20%02u", dia, mes, ano);
+        sprintf(buffer, "%02u", cont);
         Lcd_Write_String(buffer);
 
-        Lcd_Set_Cursor(2,12);
-        sprintf(buffer, "%02u", cont);
+        Lcd_Set_Cursor(2,4);
+        sprintf(buffer, "%02u", contr);
+        Lcd_Write_String(buffer);
+
+        Lcd_Set_Cursor(2,7);
+        sprintf(buffer, "%02u", contg);
+        Lcd_Write_String(buffer);
+
+        Lcd_Set_Cursor(2,10);
+        sprintf(buffer, "%02u", contb);
         Lcd_Write_String(buffer);
     }
 }
 
 void __attribute__((picinterrupt(("")))) isr(void){
-    if (PIR1bits.TMR1IF == 1){
-        unsigned char contador = 0;
+    if (INTCONbits.T0IF == 1){
         contador++;
-        if (contador == 2){
+        if (contador == 50){
             contador = 0;
-            Lcd_Shift_Right();
+
         }
-        PIR1bits.TMR1IF = 0;
-        TMR1H = 0x3C;
-        TMR1L = 0xB0;
+        TMR0 = 100;
+        INTCONbits.T0IF = 0;
     }
 }
 
@@ -2950,17 +2961,17 @@ void setup(void){
     OSCCONbits.IRCF0 = 1;
     OSCCONbits.SCS = 1;
 
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-    PIE1bits.TMR1IE = 1;
-    PIR1bits.TMR1IF = 0;
+    OPTION_REGbits.T0CS = 0;
+    OPTION_REGbits.PSA = 0;
+    OPTION_REGbits.PS2 = 1;
+    OPTION_REGbits.PS1 = 1;
+    OPTION_REGbits.PS0 = 1;
 
-    T1CONbits.T1CKPS1 = 1;
-    T1CONbits.T1CKPS0 = 1;
-    T1CONbits.TMR1CS = 0;
-    T1CONbits.TMR1ON = 1;
-    TMR1H = 0x3C;
-    TMR1L = 0xB0;
+    INTCONbits.GIE = 1;
+    INTCONbits.T0IE = 1;
+    INTCONbits.T0IF = 0;
+
+    TMR0 = 100;
 
     I2C_Init_Master(0x80);
 }
@@ -3163,28 +3174,25 @@ void AHT10_Soft_Reset(void){
 }
 
 void Slave1_Total(void){
-
-
-
-
-
-
     I2C_Start();
-    I2C_Write(0x51);
-    cont = I2C_Read();
+    I2C_Write(0x50);
+
+
 
     I2C_Stop();
     _delay((unsigned long)((100)*(8000000/4000000.0)));
+
+
+
+
+
+
 }
 
 void Slave1_Red(void){
     I2C_Start();
     I2C_Write(0x50);
     I2C_Write(0x00);
-    I2C_Restart();
-    I2C_Write(0x51);
-    cont = I2C_Read();
-
     I2C_Stop();
     _delay((unsigned long)((10)*(8000000/4000000.0)));
 }
@@ -3195,7 +3203,7 @@ void Slave1_Green(void){
     I2C_Write(0x01);
     I2C_Restart();
     I2C_Write(0x51);
-    cont = I2C_Read();
+    contg = I2C_Read();
 
     I2C_Stop();
     _delay((unsigned long)((10)*(8000000/4000000.0)));
@@ -3207,7 +3215,7 @@ void Slave1_Blue(void){
     I2C_Write(0x02);
     I2C_Restart();
     I2C_Write(0x51);
-    cont = I2C_Read();
+    contb = I2C_Read();
 
     I2C_Stop();
     _delay((unsigned long)((10)*(8000000/4000000.0)));
@@ -3226,7 +3234,7 @@ void Slave1_Normal_Temperature(void){
     I2C_Write(0x50);
     I2C_Write(0x05);
     I2C_Stop();
-
+    _delay((unsigned long)((10)*(8000000/4000000.0)));
 }
 
 void Slave2(void){

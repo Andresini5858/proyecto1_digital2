@@ -2660,8 +2660,8 @@ void I2C_Init_Master(unsigned char sp_i2c)
     TRISCbits.TRISC3 = 1;
     TRISCbits.TRISC4 = 1;
     SSPSTAT = sp_i2c;
- SSPCON = 0x28;
-    SSPCON2 = 0x00;
+ SSPCON = 0X28;
+    SSPCON2 = 0;
     if(sp_i2c == 0x80){
         SSPADD = 19;
     }

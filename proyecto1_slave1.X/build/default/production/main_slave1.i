@@ -2752,6 +2752,7 @@ extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 # 26 "main_slave1.c" 2
 
+
 # 1 "./i2c.h" 1
 # 33 "./i2c.h"
 void I2C_Init_Slave(unsigned char add_slave);
@@ -2761,13 +2762,13 @@ void I2C_Error_Data(void);
 short I2C_Write_Mode(void);
 short I2C_Read_Mode(void);
 short I2C_Error_Read(void);
-# 27 "main_slave1.c" 2
+# 28 "main_slave1.c" 2
 
 # 1 "./tcs230.h" 1
 # 24 "./tcs230.h"
 void TCS230_Init(void);
 unsigned int TCS230_Get_Value(short channel);
-# 28 "main_slave1.c" 2
+# 29 "main_slave1.c" 2
 
 
 
@@ -2775,12 +2776,13 @@ unsigned int TCS230_Get_Value(short channel);
 
 uint8_t recibido, enviado;
 uint8_t red, green, blue, contr, contg, contb, cont, dc;
+unsigned char sel = 255;
 
 void setup(void);
 
 void main(void){
     setup();
-
+    TCS230_Init();
     contr = 0;
     contg = 0;
     contb = 0;
@@ -2791,16 +2793,18 @@ void main(void){
             PORTAbits.RA1 = 1;
             PORTAbits.RA0 = 0;
 
+            red = TCS230_Get_Value(0x01);
+            green = TCS230_Get_Value(0x02);
+            blue = TCS230_Get_Value(0x03);
+
             if (PORTAbits.RA3 == 1){
                 PORTCbits.RC1 = 1;
+                cont++;
+                while(PORTAbits.RA3);
             }
             else {
                 PORTCbits.RC1 = 0;
             }
-
-
-
-
 
             if((red>28 && red<40) && (green>76 && green<90) && (blue>56 && blue<80))
             {
@@ -2820,8 +2824,8 @@ void main(void){
                 contg = contg;
                 contb = contg;
             }
+        _delay((unsigned long)((250)*(8000000/4000.0)));
         }
-        _delay((unsigned long)((500)*(8000000/4000.0)));
     }
 }
 
@@ -2830,23 +2834,19 @@ void __attribute__((picinterrupt(("")))) isr(void){
         if(I2C_Error_Read() != 0)
         {
             I2C_Error_Data();
+            PORTCbits.RC2 = 1;
         }
         if(I2C_Write_Mode() == 1)
         {
             recibido = I2C_Read_Slave();
+# 119 "main_slave1.c"
         }
-        if(I2C_Read_Mode() == 1)
+        else if(I2C_Read_Mode() == 1)
         {
             I2C_Write_Slave(cont);
-# 120 "main_slave1.c"
+# 135 "main_slave1.c"
         }
         PIR1bits.SSPIF = 0;
-    }
-    if (INTCONbits.RBIF == 1){
-        if (PORTBbits.RB4 == 1){
-            cont++;
-        }
-        INTCONbits.RBIF = 0;
     }
 }
 
@@ -2857,16 +2857,13 @@ void setup(void){
     TRISAbits.TRISA0 = 0;
     TRISAbits.TRISA1 = 0;
     TRISAbits.TRISA3 = 1;
+    TRISCbits.TRISC2 = 0;
     TRISCbits.TRISC1 = 0;
 
     PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
-
-
-
-
 
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.IRCF1 = 1;

@@ -304,10 +304,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;i2c.c: 16:     SSPSTAT = sp_i2c;
 [e = _SSPSTAT _sp_i2c ]
 "17
-[; ;i2c.c: 17:  SSPCON = 0x28;
+[; ;i2c.c: 17:  SSPCON = 0X28;
 [e = _SSPCON -> -> 40 `i `uc ]
 "18
-[; ;i2c.c: 18:     SSPCON2 = 0x00;
+[; ;i2c.c: 18:     SSPCON2 = 0;
 [e = _SSPCON2 -> -> 0 `i `uc ]
 "19
 [; ;i2c.c: 19:     if(sp_i2c == 0x80){

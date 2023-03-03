@@ -32,12 +32,13 @@
 
 uint8_t recibido, enviado;
 uint8_t red, green, blue, contr, contg, contb, cont, dc;
+unsigned char sel = 255;
 
 void setup(void);
 
 void main(void){
     setup();
-    //TCS230_Init();
+    TCS230_Init();
     contr = 0;
     contg = 0;
     contb = 0;
@@ -48,16 +49,18 @@ void main(void){
             PORTAbits.RA1 = 1;
             PORTAbits.RA0 = 0;
             
+            //red = TCS230_Get_Value(CHANNEL_R);
+            //green = TCS230_Get_Value(CHANNEL_G);
+            //blue = TCS230_Get_Value(CHANNEL_B);
+            
             if (PORTAbits.RA3 == 1){
                 PORTCbits.RC1 = 1;
+                cont++;
+                while(PORTAbits.RA3);  
             }
             else {
                 PORTCbits.RC1 = 0;
             }
-            
-            //red = TCS230_Get_Value(CHANNEL_R);
-            //green = TCS230_Get_Value(CHANNEL_G);
-            //blue = TCS230_Get_Value(CHANNEL_B);
 
             if((red>28 && red<40) && (green>76 && green<90) && (blue>56 && blue<80))
             {
@@ -76,9 +79,8 @@ void main(void){
                 contr = contr;
                 contg = contg;
                 contb = contg;
-            }
+            }   
         }
-        __delay_ms(100);
     }
 }
 
@@ -87,44 +89,49 @@ void __interrupt() isr(void){ //Interrupciones
         if(I2C_Error_Read() != 0) //Revisar si hubo error en recepción
         {
             I2C_Error_Data();
+            PORTCbits.RC2 = 1;
         }
         if(I2C_Write_Mode() == 1) //Revisar si se quiere  recibir del maestro
         {
             recibido = I2C_Read_Slave();
-        }
-        if(I2C_Read_Mode() == 1) //Revisar si se quiere enviar al maestro
-        {
-            I2C_Write_Slave(cont);
             /*if (recibido == 0){
-                I2C_Write_Slave(contr);
+                sel = 0;
             }
             else if (recibido == 1){
-                I2C_Write_Slave(contg);
+                sel = 1;
             }
             else if (recibido == 2){
-                I2C_Write_Slave(contb);
+                sel = 2;
             }
             else if (recibido == 3){
-                I2C_Write_Slave(cont);
+                sel = 3;
             }
             else if (recibido == 4){
                 dc = 0;
-                INTCONbits.RBIE = 0;
                 PORTAbits.RA0 = 0;
                 PORTAbits.RA1 = 0;
             }
             else if (recibido == 5){
                 dc = 1;
-                INTCONbits.RBIE = 1;
+            }*/
+        }
+        if(I2C_Read_Mode() == 1) //Revisar si se quiere enviar al maestro
+        {
+            I2C_Write_Slave(cont);
+            /*if (sel == 0){
+                I2C_Write_Slave(contr);
+            }
+            else if (sel == 1){
+                I2C_Write_Slave(contg);
+            }
+            else if (sel == 2){
+                I2C_Write_Slave(contb);
+            }
+            else if (sel == 3){
+                I2C_Write_Slave(cont);
             }*/
         }
         PIR1bits.SSPIF = 0; //Limpiar bandera del i2c
-    }
-    if (INTCONbits.RBIF == 1){
-        if (PORTBbits.RB4 == 1){
-            cont++;
-        }
-        INTCONbits.RBIF = 0;
     }
 }
 
@@ -135,6 +142,7 @@ void setup(void){
     TRISAbits.TRISA0 = 0;
     TRISAbits.TRISA1 = 0;
     TRISAbits.TRISA3 = 1;
+    TRISCbits.TRISC2 = 0;
     TRISCbits.TRISC1 = 0;
     
     PORTA = 0;
@@ -142,14 +150,10 @@ void setup(void){
     PORTC = 0;
     PORTD = 0;
     
-    //INTCONbits.RBIE = 1;
-    //INTCONbits.RBIF = 0;
-    //IOCBbits.IOCB4 = 1;
-    
     OSCCONbits.IRCF2 = 1; //Frecuencia de 8MHz
     OSCCONbits.IRCF1 = 1; 
     OSCCONbits.IRCF0 = 1;
     
     OSCCONbits.SCS = 1; //Utilizar reloj interno
-    I2C_Init_Slave(0x50); //Inicar esclavo y definir su direccións
+    I2C_Init_Slave(0xA0); //Inicar esclavo y definir su direccións
 }

@@ -15,201 +15,6 @@
 
 
 
-# 1 "./tcs230.h" 1
-
-
-
-
-
-
-
-
-# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 1 3
-# 18 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 3
-extern const char __xc8_OPTIM_SPEED;
-
-extern double __fpnormalize(double);
-
-
-
-# 1 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\xc8debug.h" 1 3
-# 13 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\xc8debug.h" 3
-#pragma intrinsic(__builtin_software_breakpoint)
-extern void __builtin_software_breakpoint(void);
-# 24 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 2 3
-# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\builtins.h" 1 3
-
-
-
-# 1 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 1 3
-# 13 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int8_t;
-
-
-
-
-
-
-typedef signed int int16_t;
-
-
-
-
-
-
-
-typedef __int24 int24_t;
-
-
-
-
-
-
-
-typedef signed long int int32_t;
-# 52 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint8_t;
-
-
-
-
-
-typedef unsigned int uint16_t;
-
-
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-
-
-typedef unsigned long int uint32_t;
-# 88 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_least8_t;
-
-
-
-
-
-
-
-typedef signed int int_least16_t;
-# 109 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_least24_t;
-# 118 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef signed long int int_least32_t;
-# 136 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_least8_t;
-
-
-
-
-
-
-typedef unsigned int uint_least16_t;
-# 154 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_least24_t;
-
-
-
-
-
-
-
-typedef unsigned long int uint_least32_t;
-# 181 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_fast8_t;
-
-
-
-
-
-
-typedef signed int int_fast16_t;
-# 200 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_fast24_t;
-
-
-
-
-
-
-
-typedef signed long int int_fast32_t;
-# 224 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_fast8_t;
-
-
-
-
-
-typedef unsigned int uint_fast16_t;
-# 240 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_fast24_t;
-
-
-
-
-
-
-typedef unsigned long int uint_fast32_t;
-# 268 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef int32_t intmax_t;
-# 282 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
-typedef uint32_t uintmax_t;
-
-
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-# 5 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\builtins.h" 2 3
-
-
-#pragma intrinsic(__nop)
-extern void __nop(void);
-
-
-#pragma intrinsic(_delay)
-extern __attribute__((nonreentrant)) void _delay(uint32_t);
-#pragma intrinsic(_delaywdt)
-extern __attribute__((nonreentrant)) void _delaywdt(uint32_t);
-# 25 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 2 3
-
-
-
-# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic.h" 1 3
-
-
-
-
-# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\htc.h" 1 3
-
-
-
-# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 1 3
-# 5 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\htc.h" 2 3
-# 6 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic.h" 2 3
-
-
-
-
-
-
-
-# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic_chip_select.h" 1 3
-# 724 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic_chip_select.h" 3
 # 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\proc\\pic16f887.h" 1 3
 # 45 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\proc\\pic16f887.h" 3
 # 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\__at.h" 1 3
@@ -2620,7 +2425,203 @@ extern volatile __bit nW __attribute__((address(0x4A2)));
 
 
 extern volatile __bit nWRITE __attribute__((address(0x4A2)));
-# 725 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic_chip_select.h" 2 3
+# 9 "tcs230.c" 2
+
+
+# 1 "./tcs230.h" 1
+
+
+
+
+
+
+
+
+# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 1 3
+# 18 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 3
+extern const char __xc8_OPTIM_SPEED;
+
+extern double __fpnormalize(double);
+
+
+
+# 1 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\xc8debug.h" 1 3
+# 13 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\xc8debug.h" 3
+#pragma intrinsic(__builtin_software_breakpoint)
+extern void __builtin_software_breakpoint(void);
+# 24 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 2 3
+# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\builtins.h" 1 3
+
+
+
+# 1 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 1 3
+# 13 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int8_t;
+
+
+
+
+
+
+typedef signed int int16_t;
+
+
+
+
+
+
+
+typedef __int24 int24_t;
+
+
+
+
+
+
+
+typedef signed long int int32_t;
+# 52 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint8_t;
+
+
+
+
+
+typedef unsigned int uint16_t;
+
+
+
+
+
+
+typedef __uint24 uint24_t;
+
+
+
+
+
+
+typedef unsigned long int uint32_t;
+# 88 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_least8_t;
+
+
+
+
+
+
+
+typedef signed int int_least16_t;
+# 109 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_least24_t;
+# 118 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef signed long int int_least32_t;
+# 136 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_least8_t;
+
+
+
+
+
+
+typedef unsigned int uint_least16_t;
+# 154 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_least24_t;
+
+
+
+
+
+
+
+typedef unsigned long int uint_least32_t;
+# 181 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_fast8_t;
+
+
+
+
+
+
+typedef signed int int_fast16_t;
+# 200 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_fast24_t;
+
+
+
+
+
+
+
+typedef signed long int int_fast32_t;
+# 224 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_fast8_t;
+
+
+
+
+
+typedef unsigned int uint_fast16_t;
+# 240 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_fast24_t;
+
+
+
+
+
+
+typedef unsigned long int uint_fast32_t;
+# 268 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef int32_t intmax_t;
+# 282 "E:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 3
+typedef uint32_t uintmax_t;
+
+
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
+# 5 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\builtins.h" 2 3
+
+
+#pragma intrinsic(__nop)
+extern void __nop(void);
+
+
+#pragma intrinsic(_delay)
+extern __attribute__((nonreentrant)) void _delay(uint32_t);
+#pragma intrinsic(_delaywdt)
+extern __attribute__((nonreentrant)) void _delaywdt(uint32_t);
+# 25 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 2 3
+
+
+
+# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic.h" 1 3
+
+
+
+
+# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\htc.h" 1 3
+
+
+
+# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 1 3
+# 5 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\htc.h" 2 3
+# 6 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic.h" 2 3
+
+
+
+
+
+
+
+# 1 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic_chip_select.h" 1 3
 # 14 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic.h" 2 3
 # 76 "E:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\pic.h" 3
 __attribute__((__unsupported__("The " "FLASH_READ" " macro function is no longer supported. Please use the MPLAB X MCC."))) unsigned char __flash_read(unsigned short addr);
@@ -2645,7 +2646,7 @@ extern __bank0 __bit __timeout;
 # 24 "./tcs230.h"
 void TCS230_Init(void);
 unsigned int TCS230_Get_Value(short channel);
-# 9 "tcs230.c" 2
+# 11 "tcs230.c" 2
 
 
 void TCS230_Init(void)
@@ -2655,7 +2656,9 @@ void TCS230_Init(void)
     TRISDbits.TRISD3 = 1;
     PORTDbits.RD2 = 0;
     PORTDbits.RD1 = 0;
-    T1CON = 0xF8;
+    T1CONbits.T1CKPS1 = 1;
+    T1CONbits.T1CKPS0 = 1;
+    T1CONbits.TMR1CS = 0;
     T1CONbits.TMR1ON = 1;
 }
 
@@ -2670,7 +2673,8 @@ unsigned int TCS230_Get_Value(short channel)
             while(PORTDbits.RD3 == 1);
             while(PORTDbits.RD3 == 0);
             while(PORTDbits.RD3 == 1);
-            TMR1 = 0x0000;
+            TMR1L = 0x00;
+            TMR1H = 0x00;
             while(PORTDbits.RD3 == 0);
             tcs_value = TMR1;
             break;
@@ -2681,7 +2685,8 @@ unsigned int TCS230_Get_Value(short channel)
             while(PORTDbits.RD3 == 1);
             while(PORTDbits.RD3 == 0);
             while(PORTDbits.RD3 == 1);
-            TMR1 = 0x0000;
+            TMR1L = 0x00;
+            TMR1H = 0x00;
             while(PORTDbits.RD3 == 0);
             tcs_value = TMR1;
             break;
@@ -2692,7 +2697,8 @@ unsigned int TCS230_Get_Value(short channel)
             while(PORTDbits.RD3 == 1);
             while(PORTDbits.RD3 == 0);
             while(PORTDbits.RD3 == 1);
-            TMR1 = 0x0000;
+            TMR1L = 0x00;
+            TMR1H = 0x00;
             while(PORTDbits.RD3 == 0);
             tcs_value = TMR1;
             break;

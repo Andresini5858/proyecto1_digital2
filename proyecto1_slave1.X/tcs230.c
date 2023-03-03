@@ -6,6 +6,8 @@
 *
 */
 
+#include <pic16f887.h>
+
 #include "tcs230.h"
 
 void TCS230_Init(void)
@@ -15,7 +17,9 @@ void TCS230_Init(void)
     OUT_DIR = 1;
     S2_PIN = 0;
     S3_PIN = 0;
-    T1CON = 0xF8;
+    T1CONbits.T1CKPS1 = 1;
+    T1CONbits.T1CKPS0 = 1;
+    T1CONbits.TMR1CS = 0;
     T1CONbits.TMR1ON = 1;
 }
 
@@ -30,7 +34,8 @@ unsigned int TCS230_Get_Value(short channel)
             while(OUT_PIN == 1);
             while(OUT_PIN == 0);
             while(OUT_PIN == 1);
-            TMR1 = 0x0000;
+            TMR1L = 0x00;
+            TMR1H = 0x00;
             while(OUT_PIN == 0);
             tcs_value = TMR1;
             break;
@@ -41,7 +46,8 @@ unsigned int TCS230_Get_Value(short channel)
             while(OUT_PIN == 1);
             while(OUT_PIN == 0);
             while(OUT_PIN == 1);
-            TMR1 = 0x0000;
+            TMR1L = 0x00;
+            TMR1H = 0x00;
             while(OUT_PIN == 0);
             tcs_value = TMR1;
             break;
@@ -52,7 +58,8 @@ unsigned int TCS230_Get_Value(short channel)
             while(OUT_PIN == 1);
             while(OUT_PIN == 0);
             while(OUT_PIN == 1);
-            TMR1 = 0x0000;
+            TMR1L = 0x00;
+            TMR1H = 0x00;
             while(OUT_PIN == 0);
             tcs_value = TMR1;
             break;
