@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main_slave1.c i2c.c tcs230.c
+SOURCEFILES_QUOTED_IF_SPACED=main_slave1.c "../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s2.X/tcs230.c" "../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s2.X/I2C.c"
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main_slave1.p1 ${OBJECTDIR}/i2c.p1 ${OBJECTDIR}/tcs230.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/main_slave1.p1.d ${OBJECTDIR}/i2c.p1.d ${OBJECTDIR}/tcs230.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main_slave1.p1 ${OBJECTDIR}/_ext/1743145914/tcs230.p1 ${OBJECTDIR}/_ext/1743145914/I2C.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/main_slave1.p1.d ${OBJECTDIR}/_ext/1743145914/tcs230.p1.d ${OBJECTDIR}/_ext/1743145914/I2C.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main_slave1.p1 ${OBJECTDIR}/i2c.p1 ${OBJECTDIR}/tcs230.p1
+OBJECTFILES=${OBJECTDIR}/main_slave1.p1 ${OBJECTDIR}/_ext/1743145914/tcs230.p1 ${OBJECTDIR}/_ext/1743145914/I2C.p1
 
 # Source Files
-SOURCEFILES=main_slave1.c i2c.c tcs230.c
+SOURCEFILES=main_slave1.c ../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s2.X/tcs230.c ../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s2.X/I2C.c
 
 
 
@@ -102,21 +102,21 @@ ${OBJECTDIR}/main_slave1.p1: main_slave1.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/main_slave1.d ${OBJECTDIR}/main_slave1.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/main_slave1.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/i2c.p1: i2c.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/i2c.p1.d 
-	@${RM} ${OBJECTDIR}/i2c.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/i2c.p1 i2c.c 
-	@-${MV} ${OBJECTDIR}/i2c.d ${OBJECTDIR}/i2c.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/i2c.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+${OBJECTDIR}/_ext/1743145914/tcs230.p1: ../../../../OneDrive\ -\ Universidad\ del\ Valle\ de\ Guatemala/Digital\ 2/proyecto1/s2.X/tcs230.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/1743145914" 
+	@${RM} ${OBJECTDIR}/_ext/1743145914/tcs230.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/1743145914/tcs230.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/1743145914/tcs230.p1 "../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s2.X/tcs230.c" 
+	@-${MV} ${OBJECTDIR}/_ext/1743145914/tcs230.d ${OBJECTDIR}/_ext/1743145914/tcs230.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/1743145914/tcs230.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/tcs230.p1: tcs230.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/tcs230.p1.d 
-	@${RM} ${OBJECTDIR}/tcs230.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/tcs230.p1 tcs230.c 
-	@-${MV} ${OBJECTDIR}/tcs230.d ${OBJECTDIR}/tcs230.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/tcs230.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+${OBJECTDIR}/_ext/1743145914/I2C.p1: ../../../../OneDrive\ -\ Universidad\ del\ Valle\ de\ Guatemala/Digital\ 2/proyecto1/s2.X/I2C.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/1743145914" 
+	@${RM} ${OBJECTDIR}/_ext/1743145914/I2C.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/1743145914/I2C.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/1743145914/I2C.p1 "../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s2.X/I2C.c" 
+	@-${MV} ${OBJECTDIR}/_ext/1743145914/I2C.d ${OBJECTDIR}/_ext/1743145914/I2C.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/1743145914/I2C.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
 ${OBJECTDIR}/main_slave1.p1: main_slave1.c  nbproject/Makefile-${CND_CONF}.mk 
@@ -127,21 +127,21 @@ ${OBJECTDIR}/main_slave1.p1: main_slave1.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/main_slave1.d ${OBJECTDIR}/main_slave1.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/main_slave1.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/i2c.p1: i2c.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/i2c.p1.d 
-	@${RM} ${OBJECTDIR}/i2c.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/i2c.p1 i2c.c 
-	@-${MV} ${OBJECTDIR}/i2c.d ${OBJECTDIR}/i2c.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/i2c.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+${OBJECTDIR}/_ext/1743145914/tcs230.p1: ../../../../OneDrive\ -\ Universidad\ del\ Valle\ de\ Guatemala/Digital\ 2/proyecto1/s2.X/tcs230.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/1743145914" 
+	@${RM} ${OBJECTDIR}/_ext/1743145914/tcs230.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/1743145914/tcs230.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/1743145914/tcs230.p1 "../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s2.X/tcs230.c" 
+	@-${MV} ${OBJECTDIR}/_ext/1743145914/tcs230.d ${OBJECTDIR}/_ext/1743145914/tcs230.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/1743145914/tcs230.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/tcs230.p1: tcs230.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/tcs230.p1.d 
-	@${RM} ${OBJECTDIR}/tcs230.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/tcs230.p1 tcs230.c 
-	@-${MV} ${OBJECTDIR}/tcs230.d ${OBJECTDIR}/tcs230.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/tcs230.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+${OBJECTDIR}/_ext/1743145914/I2C.p1: ../../../../OneDrive\ -\ Universidad\ del\ Valle\ de\ Guatemala/Digital\ 2/proyecto1/s2.X/I2C.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/1743145914" 
+	@${RM} ${OBJECTDIR}/_ext/1743145914/I2C.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/1743145914/I2C.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/1743145914/I2C.p1 "../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s2.X/I2C.c" 
+	@-${MV} ${OBJECTDIR}/_ext/1743145914/I2C.d ${OBJECTDIR}/_ext/1743145914/I2C.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/1743145914/I2C.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

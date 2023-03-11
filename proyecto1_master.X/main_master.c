@@ -24,162 +24,192 @@
 #include <xc.h>
 #include <stdint.h>
 #include <stdio.h>
+//#include <pic16f887.h>
 #include "LCD.h" //librería LCD
-#include "i2c.h" //Librería I2C
+#include "I2C.h"
 #include "float_str.h" //Funcion para convertir cadena a texto
 
 #define _XTAL_FREQ 8000000 //Frecuencia 8MHz
 
-uint32_t temporal;
-uint8_t estado;
-uint32_t tmp1, tmp2, hum1, hum2, th, tmp3;
-uint8_t dec2, uni2, deci2, cent2;
-uint8_t distancia;
-uint8_t contr, contg, contb, cont;
-uint32_t t, h;
-float humedad = 0.0;
-uint8_t segundos, minutos, horas, dia, mes, ano;
-unsigned char contador = 0;
-char buffer[30];
-char buffer2[48];
+uint8_t pantalla = 0; //Variable para determinar que se muestra en la pantalla
+float distancia; //Variable para guardar la distancia del sensor ultrasónico
+uint8_t contg, contb, contr; //Variable para guardar valores de color rojo, azul, y verde
+uint8_t cont = 0; //Variable para guardar cantidad de paquetes
+uint8_t bandera = 0; //Variable para antirrebotes
+uint8_t det = 0; //Variable para determinar si ya paso el delay de 3 segundos del motor
+uint8_t time = 0; //Variable del timer0 para realizar delay de 3s
+float temperatura; //Variable para guardar valor de temperatura
+uint8_t segundos, minutos, horas; //Variable para gaurdar minutos, segundos y horas
+char buffer[30]; //Buffer para convertir de numeros a cadena
+char buffer2[48]; //Buffer para convertir de numeros a cadena
+char buffer3[48]; //Buffer para convertir de numeros a cadena
 
 void setup(void);
 void Set_sec(uint8_t sec); //Función para setear segundos
 void Set_min(uint8_t min); //Función para setear minutos
 void Set_hour(uint8_t hour); //Función para setear horas
-void Set_day_week(uint8_t day_week); //Función para setear día de semana
-void Set_day(uint8_t day); //Función para setear día
-void Set_month(uint8_t month); //Función para setear mes
-void Set_year(uint8_t year); //Función para setear año
-uint8_t Read(uint8_t address); //Función para setear minutos
 void Read_Time(uint8_t *s, uint8_t *m, uint8_t *h); //Función para obtener valores de tiempo
-void Read_Fecha(uint8_t *d, uint8_t *mo, uint8_t *y); //Función para obtener valores de fecha
 uint8_t Dec_to_Bcd(uint8_t dec_number); //Función para pasar de decimal a bcd
 uint8_t Bcd_to_Dec(uint8_t bcd); //Función para pasar de bcd a decimal
 void AHT10_Init(void); //Inicializar el sensor AHT10
-void AHT10_Soft_Reset(void);
-void AHT10_Read(void);
-void Slave1_Total(void);
-void Slave1_Red(void);
-void Slave1_Blue(void);
-void Slave1_Green(void);
-void Slave_Overheat(void);
-void Slave2(void);
-void floatToString(float value, char* buffer, int decimalPlaces);
-void uint32_to_string(uint32_t value, char* buffer, uint8_t buffer_size);
+void AHT10_Soft_Reset(void); //Función para resetear el sensor de temperatura
+void AHT10_Read(void); //Función para leer y desplegar temperatura
+void Slave1_Total(void); //Función para leer la cantidad de paquetes que han pasado
+void Slave1_Red(void); //Función para leer el valor rojo del sensor de color
+void Slave1_Blue(void); //Función para leer el valor azul del sensor de color
+void Slave1_Green(void); //Función para leer el valor verde del sensor de color
+void Slave1_Return(void); //Función para hacer un stop de 3 segundos el motor dc
+void Slave2(void); //Función para leer distancia del sensor ultrasónico
+void Slave2_Servo(void); //Función para enviar valores del sensor de color y determinar la posición del servomotor
+void ESP32_Write(void); //Función para enviar datos al ESP32
+void floatToString(float value, char* buffer, int decimalPlaces); //Función para convertir de float a cadena de texto
 
-void main(void) {
-    setup();
-    Lcd_Init();
-    Lcd_Clear();
-    Lcd_Set_Cursor(1,10);
-    Lcd_Write_String("T:");
-    AHT10_Soft_Reset();
-    AHT10_Init();
-    Set_sec(0);
-    Set_min(0);
-    Set_hour(0);
-    Set_day(20);
-    Set_month(2);
-    Set_year(23);
+void main(void){
+    setup(); //Llamar al setup
+    Lcd_Init(); //Función para inicializar LCD
+    AHT10_Soft_Reset(); //Resetear el sensor de temperatura
+    AHT10_Init(); //Inicar el sensor de temperatura
+    Set_sec(0); //Setear segundos en 0
+    Set_min(0); //Setear minutos en 0 
+    Set_hour(0); //Setear horas en 0
+    __delay_ms(1000); //delay de 1s
     while(1){
-        Read_Time(&segundos, &minutos, &horas);
-        Read_Fecha(&dia, &mes, &ano);
-        AHT10_Read();
-        Slave1_Total();
-        //Slave1_Red();
-        //Slave1_Blue();
-        //Slave1_Green();
- 
-        //dec2 = distancia/1000;
-        //uni2 = (distancia / 100) % 10;
-        //deci2 = (distancia / 10) % 10;
-        //cent2 = (distancia % 10);
+        Slave1_Total(); //Llamamos para leer la cantidad de paquetes
+        Read_Time(&segundos, &minutos, &horas); //Tomar el tiempo
+        AHT10_Read(); //Tomar la temperatura
+        Slave1_Red(); //Leer el valor rojo del sensor de color
+        __delay_ms(10); //delay de 10ms
+        Slave1_Blue(); // //Leer el valor azul del sensor de color
+        __delay_ms(10); //delay 10ms
+        Slave1_Green(); //Leer el valor verde del sensor de color
+        Slave2(); //Leer distancia del sensor ultrasónico
+        __delay_ms(10); //delay de 10ms
+        Slave2_Servo(); //Enviar posición del servo determinada por el color
+        __delay_ms(50); //delay de 50ms
+        ESP32_Write(); //Función para enviar datos al ESP32
+        Slave1_Return(); //Función para detener motor dc si la distancia es menor a 15 cm
+           
+        if (pantalla == 0){ //Determinar que valores mostrar en la lcd
+            Lcd_Set_Cursor(1,10); //Setear cursor en 1,10
+            Lcd_Write_String("T:"); //Escribir una T para temperatura en la lcd
+            
+            Lcd_Set_Cursor(1,12); //Setear cursor en 1,12
+            Lcd_Write_String(buffer2); //Mostrar temperatura
+            
+            Lcd_Set_Cursor(1,1); //Setear cursor en 1,1
+            sprintf(buffer, "%02u:%02u:%02u", horas, minutos, segundos);//Convertir segundos, minutos y horas a cadena
+            Lcd_Write_String(buffer); //Mostrar en Lcd
+            
+            Lcd_Set_Cursor(2,1); //Setear cursor en 2,1
+            sprintf(buffer, "%02u", cont); //Convertir numero de paquetes a cadena
+            Lcd_Write_String(buffer); //Mostrar en Lcd
+
+            Lcd_Set_Cursor(2,4); //Setear cursor en 2,4
+            sprintf(buffer2, "%02u", contr); //Convertir variable de color rojo a cadena
+            Lcd_Write_String(buffer2); //Mostar en LCD
+
+            Lcd_Set_Cursor(2,7); //Setear cursor en 2,7
+            sprintf(buffer, "%02u", contg); //Convertir variable de color rojo a cadena
+            Lcd_Write_String(buffer);
+
+            Lcd_Set_Cursor(2,10); //Setear cursor en 1,12
+            sprintf(buffer, "%02u", contb); //Convertir variable de color azul a cadena
+            Lcd_Write_String(buffer); //Mostrar en LCD
+        }
         
-        //Lcd_Set_Cursor(2, 12);
-        //sprintf(buffer, "%d%d.%d%d ", dec2, uni2, deci2, cent2);
-        //Lcd_Write_String(buffer);
-        
-        Lcd_Set_Cursor(1,1);
-        sprintf(buffer, "%02u:%02u:%02u", horas, minutos, segundos);
-        Lcd_Write_String(buffer);
-        
-        //Lcd_Set_Cursor(2,1); //Cursor en 2,7
-        //sprintf(buffer, "%02u/%02u/20%02u", dia, mes, ano); //Función para pasar variables a cadena de caracteres
-        //Lcd_Write_String(buffer); //Mostrar en la LCD
-        
-        Lcd_Set_Cursor(2,1);
-        sprintf(buffer, "%02u", cont);
-        Lcd_Write_String(buffer);
-        
-        Lcd_Set_Cursor(2,4);
-        sprintf(buffer, "%02u", contr);
-        Lcd_Write_String(buffer);
-        
-        Lcd_Set_Cursor(2,7);
-        sprintf(buffer, "%02u", contg);
-        Lcd_Write_String(buffer);
-        
-        Lcd_Set_Cursor(2,10);
-        sprintf(buffer, "%02u", contb);
-        Lcd_Write_String(buffer);
+        else if (pantalla == 1){ //Si se presiona el boton mostrar estos botones
+            Lcd_Set_Cursor(1,10); //Setear cursor en 1,10
+            Lcd_Write_String("T:"); //Escribir T
+            
+            floattostr(distancia, buffer3, 2); //Convertir distancia a cadena
+            Lcd_Set_Cursor(1,1); //Setear cursor en 1,1
+            Lcd_Write_String(buffer3); //Mostrar en Lcd
+        }
     }
 }
 
-void __interrupt() isr(void){
-    if (INTCONbits.T0IF == 1){
-        contador++;
-        if (contador == 50){
-            contador = 0;
-            //Lcd_Shift_Left();
+void __interrupt() isr(void){ //Interrupciones
+    if (INTCONbits.RBIF == 1){ //Verificar si es interrupción del puerto B
+        INTCONbits.RBIF = 0; //Limpiar bandera de interrupción
+        if (PORTBbits.RB3 == 0){ //Ver si se presionó botón en RB3
+            __delay_ms(20); //delay de 20 ms
+            bandera = 1; //Encender bandera antirrebote
         }
-        TMR0 = 100;
-        INTCONbits.T0IF = 0;
+        else if ((PORTBbits.RB3 == 1) && (bandera == 1)){ // Verificar si se dejo de presinar el botón 
+            
+            if (pantalla == 0){ //si pantalla estaba en modo 0
+                pantalla = 1; //Cambiar a modo 1
+                Lcd_Clear(); //Limpiar LCD
+                Lcd_Init(); //Inicializar de nuevo
+                __delay_ms(400); //delay de 400ms
+            } 
+            else if (pantalla == 1){ //si pantalla estaba en modo 1             
+                pantalla = 0; //Cambiar a modo 0
+                Lcd_Clear(); //Limpiar LCD
+                Lcd_Init(); //Inicializar de nuevo
+                __delay_ms(400); //delay de 400ms
+            }
+            bandera = 0; //Limpair bandera de botón
+        }
+    }
+    if (INTCONbits.T0IF == 1){ //Verificar si es interrupción del Timer0
+        time++; //Incrementar variable para hacer delay de 3s
+        if (time == 175){ //Verificar si variable llego a 175
+            det = 0; //Variable para que el motor continue
+            time = 0; //Resetear variable
+            INTCONbits.T0IE = 0; //Detener Timer 0
+        }
+        INTCONbits.T0IF = 0; //Limpiar variable del Timer0
+        TMR0 = 100; //Cargar valor para delay de 20ms
     }
 }
 
 void setup(void){
-    ANSEL = 0;
-    ANSELH = 0;
+    ANSEL = 0; //Puertos como I/O digitales
+    ANSELH = 0; //Puertos como I/O digitales
     
-    TRISB = 0;
-    TRISD = 0;
+    TRISB = 0b00001000; //Puerto B como salida excepto RB3
+    TRISD = 0; //Puerto D como salida
+     
+    PORTA = 0; //Limpiar puerto A
+    PORTB = 0; //Limpiar puerto B
+    PORTC = 0; //Limpiar puerto C 
+    PORTD = 0; //Limpiar puerto D
     
-    PORTA = 0;
-    PORTB = 0;
-    PORTC = 0;
-    PORTD = 0;
-    
-    OSCCONbits.IRCF2 = 1;
-    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF2 = 1; //Frecuencia en 8MHz
+    OSCCONbits.IRCF1 = 1; 
     OSCCONbits.IRCF0 = 1;
-    OSCCONbits.SCS = 1;
+    OSCCONbits.SCS = 1; //Usar oscilador interno
     
-    OPTION_REGbits.T0CS = 0;
-    OPTION_REGbits.PSA = 0;
-    OPTION_REGbits.PS2 = 1;
+    OPTION_REGbits.T0CS = 0; //Utilzar el timer 0 con Fosc/4
+    OPTION_REGbits.PSA = 0; //Utilizar prescaler con timer0
+    OPTION_REGbits.PS2 = 1; //Prescaler de 256
     OPTION_REGbits.PS1 = 1;
     OPTION_REGbits.PS0 = 1;
     
-    INTCONbits.GIE = 1;
-    INTCONbits.T0IE = 1;
-    INTCONbits.T0IF = 0;
+    INTCONbits.GIE = 1; //Activar interrupciones globales
+    INTCONbits.RBIF = 0; //Limpiar bandera de interrupcion del puerto B
+    INTCONbits.RBIE = 1; //Activar interrupciones del puerto B
+    INTCONbits.T0IF = 0; //Limpiar bandera de interrupcion del puerto B
     
-    TMR0 = 100;
+    OPTION_REGbits.nRBPU = 0; //Activar pull-ups del puerto B
     
-    I2C_Init_Master(I2C_100KHZ); //Setear I2C a 100kHz
+    IOCBbits.IOCB3 = 1; //Activar interrupt on-change del pin RB3
+    WPUBbits.WPUB3 = 1; //Activar pull-up del pin RB3
+
+    I2C_Master_Init(100000); //Setear I2C a 100kHz
 }
 
 uint8_t Read(uint8_t address){ //Función para obtener datos
     uint8_t dato = 0; //Variable temporal
-    I2C_Start(); //Iniciar i2c
-    I2C_Write(0xD0); //Introducir dirección del esclavo
-    I2C_Write(address); //Introducir dirección 
-    I2C_Restart(); //Restart i2c
-    I2C_Write(0xD1); //Introducir dirección del esclavo más bit de escritura
-    dato = I2C_Read(); //Almacenar dato en variable temporal
-    I2C_Nack(); //Encender bit de not aknowledge e iniciar secuencia de reconocimiento  y transimitir el bit de reconocimiento
-    I2C_Stop(); //Stop i2c
+    I2C_Master_Start(); //Inicializar comunicación I2C //Iniciar i2c
+    I2C_Master_Write(0xD0); //Introducir dirección del esclavo
+    I2C_Master_Write(address); //Introducir dirección 
+    I2C_Master_RepeatedStart(); //Restart i2c
+    I2C_Master_Write(0xD1); //Introducir dirección del esclavo más bit de escritura
+    dato = I2C_Master_Read(0); //Almacenar dato en variable temporal
+    I2C_Nack(); //Enviar Nack //Encender bit de not aknowledge e iniciar secuencia de reconocimiento  y transimitir el bit de reconocimiento
+    I2C_Master_Stop(); //detener comunicacion //Stop i2c
     __delay_us(10); //delay de 10 us
     return dato; //Retornar dato
 }
@@ -190,66 +220,28 @@ void Read_Time(uint8_t *s, uint8_t *m, uint8_t *h){ //Función de obtener valore
     *h = Bcd_to_Dec(Read(0x02)); //Obtener horas
 }
 
-void Read_Fecha(uint8_t *d, uint8_t *mo, uint8_t *y){
-    *d = Bcd_to_Dec(Read(0x04)); //Obtener días
-    *mo = Bcd_to_Dec(Read(0x05)); //Obtener mes
-    *y = Bcd_to_Dec(Read(0x06)); //Obtener año
-}
-
 void Set_sec(uint8_t sec){ //Función para setear segundo
-    I2C_Start(); //Iniciar I2C
-    I2C_Write(0xD0); //Dirección del esclavo y bit de escritura
-    I2C_Write(0x00); //Dirección del registro a modificar
-    I2C_Write(Dec_to_Bcd(sec)); //Mandar dato en BCD
-    I2C_Stop(); //Terminar i2c
+    I2C_Master_Start(); //Inicializar comunicación I2C //Iniciar I2C
+    I2C_Master_Write(0xD0); //Dirección del esclavo y bit de escritura
+    I2C_Master_Write(0x00); //Dirección del registro a modificar
+    I2C_Master_Write(Dec_to_Bcd(sec)); //Mandar dato en BCD
+    I2C_Master_Stop(); //detener comunicacion //Terminar i2c
 }
 
 void Set_min(uint8_t min){ //Función para setear minutos
-    I2C_Start(); //Iniciar I2C
-    I2C_Write(0xD0); //Dirección del esclavo y bit de escritura
-    I2C_Write(0x01); //Dirección del registro a modificar
-    I2C_Write(Dec_to_Bcd(min)); //Mandar dato en BCD
-    I2C_Stop(); //Terminar i2c
+    I2C_Master_Start(); //Inicializar comunicación I2C //Iniciar I2C
+    I2C_Master_Write(0xD0); //Dirección del esclavo y bit de escritura
+    I2C_Master_Write(0x01); //Dirección del registro a modificar
+    I2C_Master_Write(Dec_to_Bcd(min)); //Mandar dato en BCD
+    I2C_Master_Stop(); //detener comunicacion //Terminar i2c
 }
 
 void Set_hour(uint8_t hour){ //Función para setear horas
-    I2C_Start(); //Iniciar I2C
-    I2C_Write(0xD0); //Dirección del esclavo y bit de escritura
-    I2C_Write(0x02); //Dirección del registro a modificar
-    I2C_Write(Dec_to_Bcd(hour)); //Mandar dato en BCD
-    I2C_Stop(); //Terminar i2c
-}
-
-void Set_day_week(uint8_t day_week){ //Función para setear día de semana
-    I2C_Start(); //Iniciar I2C
-    I2C_Write(0xD0); //Dirección del esclavo y bit de escritura
-    I2C_Write(0x03); //Dirección del registro a modificar
-    I2C_Write(Dec_to_Bcd(day_week)); //Mandar dato en BCD
-    I2C_Stop(); //Terminar i2c
-}
-
-void Set_day(uint8_t day){ //Función para setear numero de día
-    I2C_Start(); //Iniciar I2C
-    I2C_Write(0xD0); //Dirección del esclavo y bit de escritura
-    I2C_Write(0x04); //Dirección del registro a modificar
-    I2C_Write(Dec_to_Bcd(day)); //Mandar dato en BCD
-    I2C_Stop(); //Terminar i2c
-}
-
-void Set_month(uint8_t month){ //Función para setear mes
-    I2C_Start(); //Iniciar I2C
-    I2C_Write(0xD0); //Dirección del esclavo y bit de escritura
-    I2C_Write(0x05); //Dirección del registro a modificar
-    I2C_Write(Dec_to_Bcd(month)); //Mandar dato en BCD
-    I2C_Stop(); //Terminar i2c
-}
-
-void Set_year(uint8_t year){ //Función para setear año
-    I2C_Start(); //Iniciar I2C
-    I2C_Write(0xD0); //Dirección del esclavo y bit de escritura
-    I2C_Write(0x06);
-    I2C_Write(Dec_to_Bcd(year)); //Mandar dato en BCD
-    I2C_Stop(); //Terminar i2c
+    I2C_Master_Start(); //Inicializar comunicación I2C //Iniciar I2C
+    I2C_Master_Write(0xD0); //Dirección del esclavo y bit de escritura
+    I2C_Master_Write(0x02); //Dirección del registro a modificar
+    I2C_Master_Write(Dec_to_Bcd(hour)); //Mandar dato en BCD
+    I2C_Master_Stop(); //detener comunicacion //Terminar i2c
 }
 
 uint8_t Dec_to_Bcd(uint8_t dec_number){ //Función para pasar de numero decimal a bcd
@@ -274,165 +266,195 @@ uint8_t Bcd_to_Dec(uint8_t bcd){ //Función para pasar números de bcd a decimal
     return dec; //Retornar valor
 }
 
-void AHT10_Init(void){
-    __delay_ms(40);
-    uint8_t status;
-    I2C_Start();
-    I2C_Write(0x70);
-    I2C_Write(0x71);
-    I2C_Restart();
-    I2C_Write(0x71);
-    status = I2C_Read();
-    I2C_Nack();
-    I2C_Stop();
+void AHT10_Init(void){ //Función para inicializar sensor de temperatura
+    __delay_ms(40); //delay de 40ms
+    uint8_t status; //variable para status del sensor
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0x70); //Direccion de sensor de temperatura
+    I2C_Master_Write(0x71); //Enviar para obtener el status del sensor
+    I2C_Master_RepeatedStart(); //Repeated Start
+    I2C_Master_Write(0x71); //Leer del sensor de temperatura
+    status = I2C_Master_Read(0); //Guardar status
+    I2C_Nack(); //Enviar Nack
+    I2C_Master_Stop(); //detener comunicacion
     
-    status = status & 0b00001000;
-    
-    //if (status != 0b00001000){
-        I2C_Start();
-        I2C_Write(0x70);
-        I2C_Write(0xE1);
-        I2C_Write(0x08);
-        I2C_Write(0x00);
-        I2C_Stop();
-    //}
-    __delay_ms(10);
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0x70); //Direccion de sensor de temperatura
+    I2C_Master_Write(0xE1); //Enviar secuencia de inicialización
+    I2C_Master_Write(0x08);
+    I2C_Master_Write(0x00);
+    I2C_Master_Stop(); //detener comunicacion
+
+    __delay_ms(10); //delay de 10ms
 
 }
 
-void AHT10_Read(void){
-    uint8_t data[7];
-    float temperatura;
+void AHT10_Read(void){ //Función para leer
+    uint8_t data[7]; //arreglo para guardar los datos recibidos del sensor de temperatura
+    uint8_t r; //Variable para determinar si el sensor está listo para volver a realizar una medición
     
-    uint8_t r;
-    I2C_Start();
-    I2C_Write(0x70);
-    I2C_Write(0xAC);
-    I2C_Write(0x33);
-    I2C_Write(0x00);
-    I2C_Stop();
-    __delay_ms(80);
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0x70); //Direccion de sensor de temperatura
+    I2C_Master_Write(0xAC); //Enviar secuencia de medición
+    I2C_Master_Write(0x33);
+    I2C_Master_Write(0x00);
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_ms(80); //delay de 80ms
     
-    I2C_Start();
-    I2C_Write(0x70);
-    I2C_Write(0x71);
-    I2C_Restart();
-    I2C_Write(0x71);
-    r = I2C_Read();
-    I2C_Nack();
-    I2C_Stop();
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0x70); //Direccion de sensor de temperatura
+    I2C_Master_Write(0x71); //Secuencia para obtener status
+    I2C_Master_RepeatedStart(); //Repeated start
+    I2C_Master_Write(0x71); //Dirección mas bit de escritura
+    r = I2C_Master_Read(0); //Guardar status
+    I2C_Nack(); //Enviar Nack
+    I2C_Master_Stop(); //detener comunicacion
     
-    r = r & 0b00000000;
-    while (r != 0b00000000);
+    r = r & 0b00000000; //convertir todas las variables en 0
+    while (r != 0b00000000); //Mientras sean 0 no hacer nada
     
-    I2C_Start();
-    I2C_Write(0x71);
-    //for (uint8_t i = 0; i < 6; i++ ) {
-	//	data[i] = I2C_Read();
-    //    I2C_Ack();
-	//}
-    //data[6] = I2C_Read();
-    data[0] = I2C_Read();
-    I2C_Ack();
-    data[1] = I2C_Read();
-    I2C_Ack();
-    data[2] = I2C_Read();
-    I2C_Ack();
-    data[3] = I2C_Read();
-    I2C_Ack();
-    data[4] = I2C_Read();
-    I2C_Ack();
-    data[5] = I2C_Read();
-    I2C_Ack();
-    data[6] = I2C_Read();
-    I2C_Nack();
-    I2C_Stop();
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0x71); //Enviar dirección mas bit de escritura
+    data[0] = I2C_Master_Read(0); //Guardar
+    I2C_Ack(); //Enviar acknowledge bit
+    data[1] = I2C_Master_Read(0); //Guardar status
+    I2C_Ack(); //Enviar acknowledge bit
+    data[2] = I2C_Master_Read(0); //Guardar valor de humedad 1
+    I2C_Ack(); //Enviar acknowledge bit
+    data[3] = I2C_Master_Read(0); //Guardar valor de humedad 2
+    I2C_Ack(); //Enviar acknowledge bit
+    data[4] = I2C_Master_Read(0); //Guardar valor de humedad 3 y temperatura 1
+    I2C_Ack(); //Enviar acknowledge bit
+    data[5] = I2C_Master_Read(0); //Guardar valor de temperatura 2
+    I2C_Ack(); //Enviar acknowledge bit
+    data[6] = I2C_Master_Read(0); //Guardar valor de temperatura 3
+    I2C_Nack(); //Enviar Nack
+    I2C_Master_Stop(); //detener comunicacion
     
-    //uint32_t hum = ((uint32_t)data[1] << 12) | ((uint16_t)data[2] << 4) | (data[3] >> 4);
-	//hum = (hum * 250) >> 18;
-	//*humid = (uint16_t)hum;
-	temperatura = (((uint32_t)data[3] & 0x0F) << 16) + ((uint16_t)data[4] << 8) + data[5];
-    temperatura = ((temperatura/1048576)*200-50);
-    floattostr(temperatura, buffer2, 2);
-    Lcd_Set_Cursor(1,12);
-    Lcd_Write_String(buffer2);
+	temperatura = (((uint32_t)data[3] & 0x0F) << 16) + ((uint16_t)data[4] << 8) + data[5]; //Unir datos de temperatura en uno solo
+    temperatura = ((temperatura/1048576)*200-50); //Realizar conversión indicada por el fabricante
+    floattostr(temperatura, buffer2, 2); //Convertir el dato a cadena
+    Lcd_Set_Cursor(1,12); //Setear cursor en 1,12
+    Lcd_Write_String(buffer2); //Mostrar en LCD
 }
 
-void AHT10_Soft_Reset(void){
-    __delay_ms(40);
-    I2C_Start();
-    I2C_Write(0x70);
-    I2C_Write(0xBA);
-    I2C_Stop();
-    __delay_ms(25);
+void AHT10_Soft_Reset(void){ //Función de reset 
+    __delay_ms(40); //delay de 40ms
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0x70); //Direccion de sensor de temperatura
+    I2C_Master_Write(0xBA);//Enviar secuencia de reset
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_ms(25); //delay de 25ms
 }
 
-void Slave1_Total(void){
-    I2C_Start();
-    I2C_Write(0xA0);
-    I2C_Write(0x03);
-    I2C_Stop();
-    __delay_us(100);
+void Slave1_Total(void){ //Función para obtener numero de paquetes
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0xA0); //Enviar dirección de esclavo
+    I2C_Master_Write(0x03); //Enviar 3 para indicar que dato recibir
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_ms(20);
     
-    //I2C_Start();
-    //I2C_Write(0x51);
-    //cont = I2C_Read();
-    //I2C_Stop();
-    //__delay_us(100);  
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0xA1); //Enviar dirección mas bit de escritura
+    cont = I2C_Master_Read(0); //Leer cantidad de paquetes
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_us(10); //delay de 10us
 }
 
-void Slave1_Red(void){
-    I2C_Start();
-    I2C_Write(0x50);
-    I2C_Write(0x00);
-    I2C_Stop();
-    __delay_us(10);  
+void Slave1_Red(void){ //Función para obtener valor del color rojo
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0xA0); //Enviar dirección de esclavo
+    I2C_Master_Write(0x00); //Enviar 0 para indicar que dato recibir
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_ms(20);
+    
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0xA1); //Enviar dirección mas bit de escritura
+    contr = I2C_Master_Read(0); //Guardar dato
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_us(10); //delay de 10us
 }
 
 void Slave1_Green(void){
-    I2C_Start();
-    I2C_Write(0x50);
-    I2C_Write(0x01);
-    I2C_Restart();
-    I2C_Write(0x51);
-    contg = I2C_Read();
-    //NACK
-    I2C_Stop();
-    __delay_us(10);  
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0xA0); //Enviar dirección de esclavo
+    I2C_Master_Write(0x01); //Enviar 1 para indicar que dato recibir
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_ms(20);
+    
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0xA1); //Enviar dirección mas bit de escritura
+    contg = I2C_Master_Read(0); //Guardar dato
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_us(10); //delay de 10us
 }
 
 void Slave1_Blue(void){
-    I2C_Start();
-    I2C_Write(0x50);
-    I2C_Write(0x02);
-    I2C_Restart();
-    I2C_Write(0x51);
-    contb = I2C_Read();
-    //NACK
-    I2C_Stop();
-    __delay_us(10);  
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0xA0); //Enviar dirección de esclavo
+    I2C_Master_Write(0x02); //Enviar 2 para indicar que dato recibir
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_ms(20); //delay de 20ms
+    
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0xA1); //Enviar dirección mas bit de escritura
+    contb = I2C_Master_Read(0); //Guardar dato
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_us(10); //delay de 10us
 }
 
-void Slave1_Overheat(void){
-    I2C_Start();
-    I2C_Write(0x50);
-    I2C_Write(0x04);
-    I2C_Stop();
-    __delay_us(10);
+void Slave1_Return(void){
+    if (det == 0 && distancia < 15.0){
+        I2C_Master_Start(); //Inicializar comunicación I2C
+        I2C_Master_Write(0xA0); //Enviar dirección de esclavo
+        I2C_Master_Write(0x06); //Enviar 6 para detener motor dc
+        I2C_Master_Stop(); //detener comunicacion
+        __delay_ms(20); //delay de 20ms
+        det = 1; //Variable para indicar que han pasado 3s
+        time = 0; //Iniciar conteo de 3s
+        INTCONbits.T0IE = 1; //Iniciar timer
+        TMR0 = 100; //Cargar valor para delay de 100s
+    }
 }
 
-void Slave1_Normal_Temperature(void){
-    I2C_Start();
-    I2C_Write(0x50);
-    I2C_Write(0x05);
-    I2C_Stop();
-    __delay_us(10);
+void Slave2(void){ //Función para recibir distancia del sensor ultrasónico
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0xB1); //Dirección más bit de escritura
+    distancia = I2C_Master_Read(0); //Guardar distancia
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_ms(20); //delay de 20ms
 }
 
-void Slave2(void){
-    I2C_Start();
-    I2C_Write(0x41);
-    distancia = I2C_Read();
-    I2C_Stop();
-    __delay_us(10);
+void Slave2_Servo(void){
+    if (contr < 7 && contb > 10 && contg > 9){ //Limites para indicar que se detectó color rojo
+        I2C_Master_Start(); //Inicializar comunicación I2C
+        I2C_Master_Write(0xB0); //Dirección del esclavo
+        I2C_Master_Write(0x00); //Enviar 0 para indicar donde mover el servo
+        I2C_Master_Stop(); //detener comunicacion
+        __delay_ms(20);
+    }
+    else if (contg < 8 && contb > 6 && contr > 5){ //Limites para indicar que se detectó color verde
+        I2C_Master_Start(); //Inicializar comunicación I2C
+        I2C_Master_Write(0xB0); //Dirección del esclavo
+        I2C_Master_Write(0x01); //Enviar 1 para indicar donde mover el servo
+        I2C_Master_Stop(); //detener comunicacion
+        __delay_ms(20); //delay de 20ms
+    }
+    else if (contb < 14 && contg > 10 && contr > 5){ //Limites para indicar que se detectó color azul
+        I2C_Master_Start(); //Inicializar comunicación I2C
+        I2C_Master_Write(0xB0); //Dirección del esclavo
+        I2C_Master_Write(0x02); //Enviar 2 para indicar donde mover el servo
+        I2C_Master_Stop(); //detener comunicacion
+        __delay_ms(20); //delay de 20ms
+    }
+}
+
+void ESP32_Write(void){ //Función para enviar datos al microcontrolador ESP32
+    I2C_Master_Start(); //Inicializar comunicación I2C
+    I2C_Master_Write(0x60); //Dirección del esclavo
+    I2C_Master_Write(distancia); //Enviar distancia
+    I2C_Master_Write(cont); //Enviar numero de paquetes
+    I2C_Master_Write(temperatura); //Enviar temperatura
+    I2C_Master_Stop(); //detener comunicacion
+    __delay_ms(10); //delay de 10ms
 }

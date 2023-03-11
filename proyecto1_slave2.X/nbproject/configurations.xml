@@ -4,9 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>i2c.h</itemPath>
-      <itemPath>hc_sr04.h</itemPath>
-      <itemPath>float_str.h</itemPath>
+      <itemPath>../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s3.X/I2C.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -16,8 +14,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>main_slave2.c</itemPath>
-      <itemPath>i2c.c</itemPath>
-      <itemPath>hc_sr04.c</itemPath>
+      <itemPath>../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s3.X/I2C.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -27,6 +24,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
+    <Elem>../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s3.X</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

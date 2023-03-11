@@ -5,8 +5,8 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>LCD.h</itemPath>
-      <itemPath>i2c.h</itemPath>
       <itemPath>../proyecto1_slave2.X/float_str.h</itemPath>
+      <itemPath>../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s1.X/I2C.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -17,7 +17,7 @@
                    projectFiles="true">
       <itemPath>main_master.c</itemPath>
       <itemPath>LCD.c</itemPath>
-      <itemPath>i2c.c</itemPath>
+      <itemPath>../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s1.X/I2C.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -28,6 +28,7 @@
   <sourceRootList>
     <Elem>.</Elem>
     <Elem>../proyecto1_slave2.X</Elem>
+    <Elem>../../../../OneDrive - Universidad del Valle de Guatemala/Digital 2/proyecto1/s1.X</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
