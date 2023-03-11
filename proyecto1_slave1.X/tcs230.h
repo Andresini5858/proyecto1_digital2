@@ -13,7 +13,7 @@
 #define S2_DIR TRISDbits.TRISD2
 #define S3_DIR TRISDbits.TRISD1
 
-#define OUT_PIN PORTDbits.RD3
+#define OUT PORTDbits.RD3
 #define S2_PIN PORTDbits.RD2
 #define S3_PIN PORTDbits.RD1
 
@@ -22,4 +22,4 @@
 #define CHANNEL_B 0x03
 
 void TCS230_Init(void);
-unsigned int TCS230_Get_Value(short channel);
+uint16_t TCS230_Get_Value(short channel);
